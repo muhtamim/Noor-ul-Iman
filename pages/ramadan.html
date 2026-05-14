@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Ramadan Calendar 2026 — Complete Sehri and Iftar timings for all 30 days of Ramadan based on your location.">
+  <title>Ramadan Calendar — Noor-ul-Iman</title>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700;800&family=Amiri+Quran&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="manifest" href="../manifest.json">
+  <meta name="theme-color" content="#10b981">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/pages.css">
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="nav-container">
+    <a href="../index.html" class="nav-logo">
+      <div class="nav-logo-icon">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </div>
+      <span class="nav-logo-text">Noor-ul-Iman</span>
+    </a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="quran.html">Quran</a></li>
+      <li><a href="learn.html">Learn</a></li>
+      <li><a href="prayer.html">Prayer</a></li>
+      <li><a href="ramadan.html" class="active">Ramadan</a></li>
+      <li><a href="live.html">Live Makkah</a></li>
+      <li><a href="qibla.html">Qibla</a></li>
+      <li><a href="tasbih.html">Tasbih</a></li>
+      <li><a href="duas.html">Duas</a></li>
+      <li><a href="hadith.html">Hadith</a></li>
+    </ul>
+    <div style="display:flex; gap:0.5rem; align-items:center;">
+      <button class="theme-toggle" id="themeToggle"><i data-icon="moon"></i></button>
+      <button class="menu-toggle" id="menuToggle"><i data-icon="menu"></i></button>
+    </div>
+  </div>
+</nav>
+
+<div class="page-header" style="background:linear-gradient(135deg, #7c3aed 0%, #5b21b6 50%, #4c1d95 100%);">
+  <div class="geometric-overlay" style="color:white;"></div>
+  <h1 style="display:flex; align-items:center; justify-content:center; gap:0.75rem; position:relative;">
+    <i data-icon="moonStar" data-size="36"></i>
+    <span>Ramadan Calendar</span>
+  </h1>
+  <p style="position:relative;">Sehri & Iftar times for the holy month of Ramadan</p>
+  <div class="arabic" style="font-size:1.6rem; margin-top:1rem; color:var(--gold-light); position:relative;">شَهْرُ رَمَضَانَ الَّذِي أُنزِلَ فِيهِ الْقُرْآنُ</div>
+  <p style="font-style:italic; opacity:0.9; margin-top:0.5rem; position:relative;">"The month of Ramadan in which the Quran was revealed" — Quran 2:185</p>
+</div>
+
+<div class="container">
+
+  <!-- Ramadan Info Cards -->
+  <div class="bento-grid">
+    <div class="bento-card featured-emerald bento-4">
+      <div class="bento-icon"><i data-icon="moonStar" data-size="26"></i></div>
+      <div class="bento-title">Sehri (Suhoor)</div>
+      <div class="bento-desc">The pre-dawn meal before Fajr. Eating Sehri is a Sunnah of the Prophet ﷺ.</div>
+    </div>
+
+    <div class="bento-card featured-gold bento-4">
+      <div class="bento-icon" style="background:rgba(255,255,255,0.5);"><i data-icon="sunset" data-size="26" style="color:var(--gold-dark);"></i></div>
+      <div class="bento-title">Iftar</div>
+      <div class="bento-desc">Breaking the fast at sunset (Maghrib). Best to break with dates and water.</div>
+    </div>
+
+    <div class="bento-card featured-dark bento-4">
+      <div class="bento-icon"><i data-icon="book" data-size="26"></i></div>
+      <div class="bento-title">Taraweeh</div>
+      <div class="bento-desc">Special night prayers after Isha. A blessed time for reflection and Quran.</div>
+    </div>
+  </div>
+
+  <!-- Calendar -->
+  <div class="prayer-widget" style="margin-top:2rem;">
+    <div class="prayer-widget-header">
+      <div>
+        <div class="prayer-widget-title">
+          <i data-icon="calendar" data-size="24" style="color:var(--primary);"></i>
+          <span>30-Day Ramadan Schedule</span>
+        </div>
+        <div class="prayer-location" id="ramadanStatus">Loading...</div>
+      </div>
+    </div>
+    <div id="ramadanTable">
+      <div class="spinner"></div>
+    </div>
+  </div>
+
+  <!-- Iftar Dua -->
+  <div class="bento-grid" style="margin-top:2rem;">
+    <div class="bento-6">
+      <div class="dua-card">
+        <div class="dua-title"><i data-icon="moonStar" data-size="18" style="vertical-align:-3px;"></i> Dua for Sehri (Niyyah)</div>
+        <div class="dua-arabic">وَبِصَوْمِ غَدٍ نَّوَيْتُ مِنْ شَهْرِ رَمَضَانَ</div>
+        <div class="dua-transliteration">Wa bisawmi ghadinn nawaiytu min shahri ramadan</div>
+        <div class="dua-translation">I intend to keep the fast for tomorrow in the month of Ramadan.</div>
+      </div>
+    </div>
+    <div class="bento-6">
+      <div class="dua-card">
+        <div class="dua-title"><i data-icon="sunset" data-size="18" style="vertical-align:-3px;"></i> Dua for Iftar (Breaking Fast)</div>
+        <div class="dua-arabic">ذَهَبَ الظَّمَأُ وَابْتَلَّتِ الْعُرُوقُ وَثَبَتَ الْأَجْرُ إِنْ شَاءَ اللَّهُ</div>
+        <div class="dua-transliteration">Dhahaba-z-zama'u wabtallatil-'uruqu wa thabatal-ajru insha'Allah</div>
+        <div class="dua-translation">The thirst is gone, the veins are moistened, and the reward is confirmed, if Allah wills.</div>
+        <div class="dua-reference">— Abu Dawud 2357</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Ramadan Tips -->
+  <div class="section-header">
+    <div class="section-eyebrow">Ramadan Essentials</div>
+    <h2 class="section-title">Make the <span class="gradient-text">Most</span> of Ramadan</h2>
+  </div>
+
+  <div class="bento-grid">
+    <div class="bento-card bento-4">
+      <div class="bento-icon" style="background:linear-gradient(135deg, #fce7f3, #ec4899);">
+        <i data-icon="book" data-size="26" style="color:white;"></i>
+      </div>
+      <div class="bento-title">Recite Quran Daily</div>
+      <div class="bento-desc">Aim to complete the Quran. Recite at least 1 Juz (Para) per day to finish in 30 days.</div>
+    </div>
+
+    <div class="bento-card bento-4">
+      <div class="bento-icon" style="background:linear-gradient(135deg, #fef3c7, #f59e0b);">
+        <i data-icon="hands" data-size="26" style="color:white;"></i>
+      </div>
+      <div class="bento-title">Increase Dua</div>
+      <div class="bento-desc">The dua of a fasting person is not rejected. Especially at the time of Iftar.</div>
+    </div>
+
+    <div class="bento-card bento-4">
+      <div class="bento-icon" style="background:linear-gradient(135deg, #d1fae5, #10b981);">
+        <i data-icon="coin" data-size="26" style="color:white;"></i>
+      </div>
+      <div class="bento-title">Give Charity (Sadaqah)</div>
+      <div class="bento-desc">Charity in Ramadan is multiplied. The Prophet ﷺ was most generous in this month.</div>
+    </div>
+  </div>
+
+</div>
+
+<footer class="footer">
+  <div class="footer-bottom">
+    <p>© 2026 Noor-ul-Iman — Made for the Ummah</p>
+  </div>
+</footer>
+
+<script src="../js/icons.js"></script>
+<script src="../data/azan-dua.js"></script>
+<script src="../js/app.js"></script>
+<script src="../js/azan.js"></script>
+<script src="../js/ramadan.js"></script>
+</body>
+</html>

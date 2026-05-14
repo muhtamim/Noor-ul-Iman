@@ -1,0 +1,13 @@
+{
+  "name": "noor-ul-iman",
+  "version": "1.0.0",
+  "description": "Noor-ul-Iman — Complete Islamic Web App for Muslims (Quran, Prayer Times, Qibla, Duas, Tasbih, 99 Names, Zakat Calculator)",
+  "main": "index.html",
+  "scripts": {
+    "start": "python3 -m http.server 8000",
+    "dev": "npx http-server -p 8000 -o"
+  },
+  "keywords": ["islam", "quran", "muslim", "prayer-times", "qibla", "tasbih", "duas", "zakat", "hijri"],
+  "author": "Project Alpha",
+  "license": "MIT"
+}

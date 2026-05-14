@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Watch live telawat (Quran recitation) from Masjid al-Haram (Makkah) and Masjid an-Nabawi (Madinah) 24/7.">
+  <title>Live Makkah & Madinah — Noor-ul-Iman</title>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700;800&family=Amiri+Quran&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="manifest" href="../manifest.json">
+  <meta name="theme-color" content="#10b981">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/pages.css">
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="nav-container">
+    <a href="../index.html" class="nav-logo">
+      <div class="nav-logo-icon">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </div>
+      <span class="nav-logo-text">Noor-ul-Iman</span>
+    </a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="quran.html">Quran</a></li>
+      <li><a href="learn.html">Learn</a></li>
+      <li><a href="prayer.html">Prayer</a></li>
+      <li><a href="ramadan.html">Ramadan</a></li>
+      <li><a href="live.html" class="active">Live Makkah</a></li>
+      <li><a href="qibla.html">Qibla</a></li>
+      <li><a href="duas.html">Duas</a></li>
+      <li><a href="hadith.html">Hadith</a></li>
+    </ul>
+    <div style="display:flex; gap:0.5rem; align-items:center;">
+      <button class="theme-toggle" id="themeToggle"><i data-icon="moon"></i></button>
+      <button class="menu-toggle" id="menuToggle"><i data-icon="menu"></i></button>
+    </div>
+  </div>
+</nav>
+
+<div class="page-header" style="background:linear-gradient(135deg, #1e293b 0%, #0f172a 100%);">
+  <div class="geometric-overlay"></div>
+  <div style="display:inline-flex; align-items:center; gap:0.5rem; background:rgba(239, 68, 68, 0.15); color:#fca5a5; padding:0.4rem 1rem; border-radius:999px; font-size:0.85rem; font-weight:700; margin-bottom:1rem; position:relative;">
+    <span style="width:8px; height:8px; background:#ef4444; border-radius:50%; animation:pulse-dot 1.5s infinite;"></span>
+    <span>LIVE 24/7</span>
+  </div>
+  <h1 style="display:flex; align-items:center; justify-content:center; gap:0.75rem; position:relative;">
+    <i data-icon="mosque" data-size="36"></i>
+    <span>Live Makkah & Madinah</span>
+  </h1>
+  <p style="position:relative;">Watch live Quran recitation from the two holy mosques</p>
+</div>
+
+<div class="container">
+
+  <!-- Stream Player (main video) -->
+  <div class="prayer-widget" style="padding:1.5rem;">
+    <div class="prayer-widget-header">
+      <div>
+        <div class="prayer-widget-title" id="streamTitle">
+          <i data-icon="mosque" data-size="22" style="color:var(--primary);"></i>
+          <span>Masjid al-Haram • Makkah Live</span>
+        </div>
+        <div class="prayer-location" id="streamSource">Live streaming 24/7</div>
+      </div>
+      <div style="display:flex; gap:0.5rem; align-items:center; flex-wrap:wrap;">
+        <a id="openYoutubeBtn" target="_blank" rel="noopener" class="btn btn-outline btn-small" href="https://www.youtube.com/watch?v=nw16SGf8nDk">
+          <i data-icon="arrowRight" data-size="14"></i>
+          <span>Open in YouTube</span>
+        </a>
+        <button class="btn btn-outline btn-small" onclick="toggleFullscreen()">
+          <i data-icon="lightning" data-size="14"></i>
+          <span>Fullscreen</span>
+        </button>
+      </div>
+    </div>
+
+    <div class="stream-wrapper" id="streamWrapper">
+      <iframe id="streamFrame"
+        src="https://www.youtube.com/embed/nw16SGf8nDk?autoplay=1&mute=1"
+        title="Live Makkah Stream"
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        allowfullscreen
+        referrerpolicy="no-referrer-when-downgrade">
+      </iframe>
+    </div>
+
+    <div style="margin-top:1rem; display:flex; gap:0.5rem; align-items:flex-start; padding:1rem 1.25rem; background:linear-gradient(135deg, rgba(245, 158, 11, 0.1), rgba(245, 158, 11, 0.05)); border-left:4px solid var(--gold); border-radius:var(--radius-sm); font-size:0.88rem;">
+      <i data-icon="settings" data-size="16" style="color:var(--gold-dark); margin-top:2px; flex-shrink:0;"></i>
+      <div>
+        <strong>If video shows "Unavailable":</strong> YouTube live streams change frequently. Click another stream below, or click <strong>"Open in YouTube"</strong> to find current live streams on YouTube directly. Audio streams below work independently.
+      </div>
+    </div>
+  </div>
+
+  <!-- Stream Options -->
+  <div class="section-header">
+    <div class="section-eyebrow">Choose a Stream</div>
+    <h2 class="section-title">Available <span class="gradient-text">Live Streams</span></h2>
+    <p class="section-subtitle">Multiple official channels — try a different one if one isn't loading</p>
+  </div>
+
+  <div class="bento-grid" id="streamGrid"></div>
+
+  <!-- Audio Quran Radio Stations -->
+  <div class="section-header">
+    <div class="section-eyebrow">Audio Streams</div>
+    <h2 class="section-title">24/7 <span class="gradient-text">Quran Radio</span></h2>
+    <p class="section-subtitle">Listen to Quran recitation by world-renowned reciters</p>
+  </div>
+
+  <div class="bento-grid" id="audioGrid"></div>
+
+  <!-- Audio Player Footer -->
+  <div id="audioPlayerFooter" class="audio-footer" style="display:none;">
+    <div style="display:flex; align-items:center; gap:1rem; flex:1; min-width:0;">
+      <div class="audio-equalizer">
+        <span></span><span></span><span></span><span></span>
+      </div>
+      <div style="min-width:0;">
+        <div style="font-weight:700; color:white; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;" id="nowPlayingTitle">Now Playing</div>
+        <div style="font-size:0.85rem; color:var(--gold-light);">Live Quran Audio</div>
+      </div>
+    </div>
+    <button class="btn btn-outline btn-small" onclick="stopAudioStream()" style="color:white; border-color:rgba(255,255,255,0.3);">
+      <i data-icon="check" data-size="14"></i>
+      <span>Stop</span>
+    </button>
+  </div>
+
+  <!-- Quote -->
+  <div class="bento-grid" style="margin-top:2rem;">
+    <div class="bento-12">
+      <div class="bento-card featured-dark" style="text-align:center; padding:3rem 2rem;">
+        <div class="geometric-overlay" style="opacity:0.1;"></div>
+        <div style="position:relative; z-index:1;">
+          <div class="arabic" style="font-size:2rem; color:var(--gold-light); margin-bottom:1rem;">إِنَّ أَوَّلَ بَيْتٍ وُضِعَ لِلنَّاسِ لَلَّذِي بِبَكَّةَ مُبَارَكًا</div>
+          <p style="font-size:1.1rem; opacity:0.9; margin-bottom:1rem; max-width:700px; margin-left:auto; margin-right:auto;">
+            "Indeed, the first House [of worship] established for mankind was that at Bakkah (Makkah) — blessed and a guidance for the worlds."
+          </p>
+          <p style="color:var(--gold-light); font-weight:700;">— Quran 3:96</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<footer class="footer">
+  <div class="footer-bottom">
+    <p>© 2026 Noor-ul-Iman — Live streams from public channels</p>
+  </div>
+</footer>
+
+<script src="../js/icons.js"></script>
+<script src="../data/azan-dua.js"></script>
+<script src="../js/app.js"></script>
+<script src="../js/azan.js"></script>
+<script>
+// ====== Video Streams (Multiple Verified Channels) ======
+// Channel-based URLs auto-resolve to current live stream
+// Direct video IDs are confirmed working at time of writing
+const videoStreams = [
+  { id: 'makkah-main', name: 'Makkah Live (Verified)', desc: 'Masjid al-Haram — Confirmed working stream',
+    embed: 'https://www.youtube.com/embed/nw16SGf8nDk?autoplay=1&mute=1',
+    yturl: 'https://www.youtube.com/watch?v=nw16SGf8nDk',
+    label: 'Masjid al-Haram • Makkah Live' },
+  { id: 'madinah-main', name: 'Madinah Live (Verified)', desc: 'Masjid an-Nabawi — Confirmed working stream',
+    embed: 'https://www.youtube.com/embed/3L7Gf0BD0gc?autoplay=1&mute=1',
+    yturl: 'https://www.youtube.com/watch?v=3L7Gf0BD0gc',
+    label: 'Masjid an-Nabawi • Madinah Live' },
+  { id: 'makkah-search', name: 'Makkah Live (Auto-Search)', desc: 'Auto-find currently live Makkah stream',
+    embed: 'https://www.youtube.com/embed/?listType=search&list=makkah+live+24+7&autoplay=1&mute=1',
+    yturl: 'https://www.youtube.com/results?search_query=makkah+live+24+7&sp=EgJAAQ%253D%253D',
+    label: 'Makkah Live • Auto-search' },
+  { id: 'madinah-search', name: 'Madinah Live (YouTube Search)', desc: 'Auto-find currently live Madinah stream',
+    embed: 'https://www.youtube.com/embed/?listType=search&list=madinah+live+24+7&autoplay=1&mute=1',
+    yturl: 'https://www.youtube.com/results?search_query=madinah+live+24+7&sp=EgJAAQ%253D%253D',
+    label: 'Madinah Live • Auto-search' },
+  { id: 'makkah-ch1', name: 'Saudi Quran TV', desc: 'Official Saudi Quran Channel',
+    embed: 'https://www.youtube.com/embed/live_stream?channel=UCO5JE7ZS9MIxLhcrNQpfwsg&autoplay=1&mute=1',
+    yturl: 'https://www.youtube.com/channel/UCO5JE7ZS9MIxLhcrNQpfwsg/live',
+    label: 'Saudi Quran TV' },
+  { id: 'makkah-ch2', name: 'Quran TV', desc: 'Quran Channel — Live recitation',
+    embed: 'https://www.youtube.com/embed/live_stream?channel=UCmUmywBPM-pXrXKjPlYAOFw&autoplay=1&mute=1',
+    yturl: 'https://www.youtube.com/channel/UCmUmywBPM-pXrXKjPlYAOFw/live',
+    label: 'Quran TV Channel' },
+  { id: 'madinah-ch1', name: 'Sunnah TV', desc: 'Saudi Sunnah Channel — Masjid an-Nabawi',
+    embed: 'https://www.youtube.com/embed/live_stream?channel=UCwjeAOlSrLDqxkFh-V1uoNw&autoplay=1&mute=1',
+    yturl: 'https://www.youtube.com/channel/UCwjeAOlSrLDqxkFh-V1uoNw/live',
+    label: 'Saudi Sunnah TV • Madinah' },
+  { id: 'madinah-ch2', name: 'Madinah Live HD', desc: 'Madinah Channel',
+    embed: 'https://www.youtube.com/embed/live_stream?channel=UCN5DXyKEC1OOA9_NfRyiUug&autoplay=1&mute=1',
+    yturl: 'https://www.youtube.com/channel/UCN5DXyKEC1OOA9_NfRyiUug/live',
+    label: 'Madinah Channel' }
+];
+
+// ====== Audio Streams (Confirmed Working URLs) ======
+const audioStations = [
+  { name: 'Quran Kareem Radio', desc: 'Saudi Arabia • 128kbps',
+    url: 'https://Qurankareem.live-streams.nl/stream' },
+  { name: 'Sheikh Mishary Alafasy', desc: 'Famous Kuwaiti Qari • 24/7',
+    url: 'https://backup.qurango.net/radio/mishary_alafasi' },
+  { name: 'Sheikh Abdul Basit', desc: 'Legendary Egyptian Qari',
+    url: 'https://backup.qurango.net/radio/abdulbasit_mojawwad' },
+  { name: 'Sheikh Maher Al-Mueaqly', desc: 'Imam of Masjid al-Haram',
+    url: 'https://backup.qurango.net/radio/maher_al_mueaqly' },
+  { name: 'Sheikh Saud Al-Shuraim', desc: 'Imam of Masjid al-Haram',
+    url: 'https://backup.qurango.net/radio/saud_alshuraim' },
+  { name: 'Sheikh Ahmad Al-Ajamy', desc: 'Beautiful melodious recitation',
+    url: 'https://backup.qurango.net/radio/ahmad_alajamy' },
+  { name: 'Sheikh Saad Al-Ghamdi', desc: 'Clear & precise tajweed',
+    url: 'https://backup.qurango.net/radio/saad_alghamdi' },
+  { name: 'Sheikh Abdullah Basfar', desc: 'Renowned Saudi reciter',
+    url: 'https://backup.qurango.net/radio/abdullah_basfar' },
+  { name: 'Sheikh Hudhaify', desc: 'Imam of Masjid an-Nabawi',
+    url: 'https://backup.qurango.net/radio/ali_alhudhaifi' }
+];
+
+function renderStreams() {
+  const grid = document.getElementById('streamGrid');
+  if (!grid) return;
+  grid.innerHTML = videoStreams.map(s => `
+    <div class="bento-card bento-4 stream-option" onclick="switchStream('${s.id}')" data-stream-id="${s.id}" style="cursor:pointer;">
+      <div style="display:flex; justify-content:space-between; align-items:flex-start;">
+        <div style="flex:1;">
+          <div style="display:flex; align-items:center; gap:0.4rem; margin-bottom:0.5rem;">
+            <span style="width:8px; height:8px; background:#ef4444; border-radius:50%; animation:pulse-dot 1.5s infinite;"></span>
+            <span style="font-size:0.7rem; font-weight:800; color:#ef4444; text-transform:uppercase; letter-spacing:0.1em;">LIVE</span>
+          </div>
+          <div class="bento-title" style="font-size:1.1rem;">${s.name}</div>
+          <div class="bento-desc">${s.desc}</div>
+        </div>
+        <div class="audio-play-btn" style="width:40px; height:40px;">
+          <i data-icon="lightning" data-size="16"></i>
+        </div>
+      </div>
+    </div>
+  `).join('');
+  if (window.injectIcons) window.injectIcons();
+  // Mark first as active
+  grid.querySelector('.stream-option')?.classList.add('playing');
+}
+
+function renderAudioStations() {
+  const grid = document.getElementById('audioGrid');
+  if (!grid) return;
+  grid.innerHTML = audioStations.map((s, i) => `
+    <div class="bento-card bento-4 audio-station" data-stream="${s.url}" data-name="${s.name}">
+      <div style="display:flex; align-items:center; justify-content:space-between; gap:1rem;">
+        <div style="flex:1; min-width:0;">
+          <div class="bento-title">${s.name}</div>
+          <div class="bento-desc">${s.desc}</div>
+        </div>
+        <button class="audio-play-btn" onclick="playAudioStream(this)" aria-label="Play">
+          <i data-icon="lightning" data-size="20"></i>
+        </button>
+      </div>
+    </div>
+  `).join('');
+  if (window.injectIcons) window.injectIcons();
+}
+
+function switchStream(id) {
+  const stream = videoStreams.find(s => s.id === id);
+  if (!stream) return;
+
+  const frame = document.getElementById('streamFrame');
+  const title = document.getElementById('streamTitle');
+  const source = document.getElementById('streamSource');
+  const ytBtn = document.getElementById('openYoutubeBtn');
+
+  if (frame) frame.src = stream.embed;
+  if (ytBtn && stream.yturl) ytBtn.href = stream.yturl;
+  if (title) {
+    title.innerHTML = `<i data-icon="mosque" data-size="22" style="color:var(--primary);"></i><span>${stream.label}</span>`;
+  }
+  if (source) source.textContent = stream.desc;
+
+  document.querySelectorAll('.stream-option').forEach(s => s.classList.remove('playing'));
+  document.querySelector(`[data-stream-id="${id}"]`)?.classList.add('playing');
+
+  if (window.injectIcons) window.injectIcons();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function toggleFullscreen() {
+  const wrapper = document.getElementById('streamWrapper');
+  if (!document.fullscreenElement) {
+    wrapper.requestFullscreen?.() || wrapper.webkitRequestFullscreen?.();
+  } else {
+    document.exitFullscreen?.();
+  }
+}
+
+let currentAudio = null;
+let loadingTimeout = null;
+
+function playAudioStream(btn) {
+  const station = btn.closest('.audio-station');
+  const streamUrl = station.dataset.stream;
+  const name = station.dataset.name;
+
+  if (currentAudio) {
+    currentAudio.pause();
+    currentAudio = null;
+  }
+  if (loadingTimeout) clearTimeout(loadingTimeout);
+
+  document.querySelectorAll('.audio-station').forEach(s => s.classList.remove('playing', 'loading'));
+  station.classList.add('loading');
+
+  if (window.showToast) window.showToast('Connecting to stream...');
+
+  currentAudio = new Audio();
+  currentAudio.crossOrigin = "anonymous";
+  currentAudio.volume = 0.8;
+  currentAudio.src = streamUrl;
+
+  // Timeout fallback - if not loaded in 8s, show error
+  loadingTimeout = setTimeout(() => {
+    if (currentAudio && currentAudio.readyState < 2) {
+      if (window.showToast) window.showToast('Stream took too long. Try another station.');
+      station.classList.remove('loading');
+      stopAudioStream();
+    }
+  }, 8000);
+
+  currentAudio.addEventListener('playing', () => {
+    clearTimeout(loadingTimeout);
+    station.classList.remove('loading');
+    station.classList.add('playing');
+    if (window.showToast) window.showToast('Now playing: ' + name);
+    const footer = document.getElementById('audioPlayerFooter');
+    const title = document.getElementById('nowPlayingTitle');
+    if (footer) footer.style.display = 'flex';
+    if (title) title.textContent = name;
+  });
+
+  currentAudio.addEventListener('error', () => {
+    clearTimeout(loadingTimeout);
+    station.classList.remove('loading');
+    if (window.showToast) window.showToast('Could not load stream. Try another.');
+    stopAudioStream();
+  });
+
+  currentAudio.play().catch(e => {
+    console.error('Play failed:', e);
+    clearTimeout(loadingTimeout);
+    station.classList.remove('loading');
+    if (window.showToast) window.showToast('Click again to allow audio playback.');
+  });
+}
+
+function stopAudioStream() {
+  if (currentAudio) {
+    currentAudio.pause();
+    currentAudio.src = '';
+    currentAudio = null;
+  }
+  document.querySelectorAll('.audio-station').forEach(s => s.classList.remove('playing', 'loading'));
+  const footer = document.getElementById('audioPlayerFooter');
+  if (footer) footer.style.display = 'none';
+}
+
+// Init
+document.addEventListener('DOMContentLoaded', () => {
+  renderStreams();
+  renderAudioStations();
+});
+</script>
+
+<style>
+.stream-option.playing {
+  border-color: var(--primary);
+  background: linear-gradient(135deg, var(--emerald-50), white);
+  box-shadow: var(--shadow-md), 0 0 30px rgba(16, 185, 129, 0.2);
+}
+[data-theme="dark"] .stream-option.playing {
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), var(--bg-card-solid));
+}
+.audio-station.loading .audio-play-btn {
+  background: var(--gold);
+  animation: spin 1s linear infinite;
+}
+</style>
+</body>
+</html>

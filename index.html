@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Noor-ul-Iman — The complete Islamic app: Quran with audio, prayer times with azan, Qibla compass, Ramadan calendar, live Makkah stream, hadith, duas, tasbih, and Zakat calculator. Free forever.">
+  <meta name="keywords" content="Islamic app, Quran online, prayer times, azan, Qibla direction, Ramadan calendar, sehri iftar, live Makkah, hadith, duas, Bangla Islamic">
+  <meta name="theme-color" content="#10b981">
+  <meta name="author" content="Noor-ul-Iman">
+  <meta property="og:title" content="Noor-ul-Iman — Ultimate Islamic App">
+  <meta property="og:description" content="Complete Islamic app: Quran with audio, prayer times with azan, Qibla, Ramadan calendar, live Makkah, hadith, duas, tasbih, and more.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="/">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Noor-ul-Iman — Ultimate Islamic App">
+  <meta name="twitter:description" content="Quran, prayer times with azan, Qibla, Ramadan calendar, live Makkah & more.">
+  <link rel="manifest" href="manifest.json">
+  <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><defs><linearGradient id=%22g%22 x1=%220%22 y1=%220%22 x2=%22100%22 y2=%22100%22><stop offset=%220%22 stop-color=%22%2310b981%22/><stop offset=%221%22 stop-color=%22%23059669%22/></linearGradient></defs><rect width=%22100%22 height=%22100%22 rx=%2225%22 fill=%22url(%23g)%22/><path d=%22M65 55 a18 18 0 1 1 -10 -30 a14 14 0 1 0 10 30 z%22 fill=%22white%22/></svg>">
+  <title>Noor-ul-Iman — The Ultimate Islamic App for Every Muslim</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700;800&family=Amiri+Quran&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/pages.css">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><defs><linearGradient id=%22g%22 x1=%220%22 y1=%220%22 x2=%22100%22 y2=%22100%22><stop offset=%220%22 stop-color=%22%2310b981%22/><stop offset=%221%22 stop-color=%22%23059669%22/></linearGradient></defs><rect width=%22100%22 height=%22100%22 rx=%2225%22 fill=%22url(%23g)%22/><path d=%22M65 55 a18 18 0 1 1 -10 -30 a14 14 0 1 0 10 30 z%22 fill=%22white%22/></svg>">
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar">
+  <div class="nav-container">
+    <a href="index.html" class="nav-logo">
+      <div class="nav-logo-icon">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+        </svg>
+      </div>
+      <span class="nav-logo-text">Noor-ul-Iman</span>
+    </a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html" class="active">Home</a></li>
+      <li><a href="pages/quran.html">Quran</a></li>
+      <li><a href="pages/learn.html">Learn</a></li>
+      <li><a href="pages/prayer.html">Prayer</a></li>
+      <li><a href="pages/ramadan.html">Ramadan</a></li>
+      <li><a href="pages/live.html">Live Makkah</a></li>
+      <li><a href="pages/qibla.html">Qibla</a></li>
+      <li><a href="pages/duas.html">Duas</a></li>
+      <li><a href="pages/hadith.html">Hadith</a></li>
+      <li><a href="pages/tasbih.html">Tasbih</a></li>
+      <li><a href="pages/zakat.html">Zakat</a></li>
+    </ul>
+    <div style="display:flex; gap:0.5rem; align-items:center;">
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme"><i data-icon="moon"></i></button>
+      <button class="menu-toggle" id="menuToggle" aria-label="Menu"><i data-icon="menu"></i></button>
+    </div>
+  </div>
+</nav>
+
+<!-- Hero Section -->
+<section class="hero">
+  <div class="hero-bg-pattern"></div>
+  <div class="geometric-overlay"></div>
+
+  <!-- Floating decorative SVGs -->
+  <div class="floating-element floating-1" style="opacity:0.15;">
+    <svg width="80" height="80" viewBox="0 0 24 24" fill="currentColor" stroke="none" style="color:var(--primary);">
+      <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+    </svg>
+  </div>
+  <div class="floating-element floating-2" style="opacity:0.12;">
+    <svg width="64" height="64" viewBox="0 0 24 24" fill="currentColor" stroke="none" style="color:var(--gold);">
+      <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+    </svg>
+  </div>
+  <div class="floating-element floating-3" style="opacity:0.1;">
+    <svg width="90" height="90" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" style="color:var(--primary);">
+      <path d="M3 21V11M21 21V11M3 11c0-3 4-6 9-6s9 3 9 6M12 5V2M11 2h2M7 21V14a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v7M3 21h18M12 21v-5"/>
+    </svg>
+  </div>
+  <div class="floating-element floating-4" style="opacity:0.12;">
+    <svg width="70" height="70" viewBox="0 0 24 24" fill="currentColor" stroke="none" style="color:var(--gold);">
+      <circle cx="12" cy="5" r="2"/><circle cx="6.5" cy="8" r="1.5"/><circle cx="17.5" cy="8" r="1.5"/><circle cx="4" cy="13" r="1.5"/><circle cx="20" cy="13" r="1.5"/><circle cx="6.5" cy="18" r="1.5"/><circle cx="17.5" cy="18" r="1.5"/><circle cx="12" cy="20" r="2"/>
+    </svg>
+  </div>
+
+  <div class="hero-content">
+    <div class="hero-badge">
+      <span class="hero-badge-dot"></span>
+      <span>Trusted by Muslims Worldwide</span>
+    </div>
+    <div class="bismillah">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</div>
+    <h1>
+      Your Complete<br>
+      <span class="gradient-text">Spiritual Journey</span><br>
+      in One Beautiful App
+    </h1>
+    <p>
+      Quran, prayer times, Qibla, duas, tasbih, hadith — every Islamic essential, beautifully designed and always at your fingertips. <span style="color:var(--primary); font-weight:600;">Free forever.</span>
+    </p>
+    <div class="hero-cta">
+      <a href="pages/quran.html" class="btn">
+        <i data-icon="book" data-size="18"></i>
+        <span>Start Reading Quran</span>
+      </a>
+      <a href="#features" class="btn btn-outline">
+        <span>Explore Features</span>
+        <i data-icon="arrowRight" data-size="18"></i>
+      </a>
+    </div>
+  </div>
+</section>
+
+<div class="container">
+
+  <!-- Row 1: Daily Verse + Hijri + Clock -->
+  <div class="bento-grid">
+    <div class="bento-card featured-dark bento-8" style="padding:0;">
+      <div class="daily-verse-card" id="dailyVerse" style="height:100%; border-radius:var(--radius);">
+        <div class="spinner"></div>
+      </div>
+    </div>
+
+    <div class="bento-4" style="display:flex; flex-direction:column; gap:1.25rem;">
+      <div class="hijri-display" id="hijriDate" style="flex:1;">
+        <div class="spinner"></div>
+      </div>
+      <div class="bento-card featured-emerald" style="flex:0;">
+        <div style="position:relative; z-index:1;">
+          <div style="display:flex; align-items:center; gap:0.5rem; font-size:0.8rem; opacity:0.9; text-transform:uppercase; letter-spacing:0.1em; font-weight:700; margin-bottom:0.5rem;">
+            <i data-icon="clock" data-size="14"></i>
+            <span>Current Time</span>
+          </div>
+          <div class="live-clock-display" id="liveClock" style="color:white; -webkit-text-fill-color:white;">--:--</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Row 2: Prayer Times Widget -->
+  <div class="bento-grid">
+    <div class="bento-12">
+      <div class="prayer-widget">
+        <div class="prayer-widget-header">
+          <div>
+            <div class="prayer-widget-title">
+              <i data-icon="mosque" data-size="24" style="color:var(--primary);"></i>
+              <span>Today's Prayer Times</span>
+            </div>
+            <div class="prayer-location" id="prayerLocation">
+              <i data-icon="mapPin" data-size="14"></i>
+              <span>Loading location...</span>
+            </div>
+          </div>
+          <a href="pages/prayer.html" class="btn btn-small">
+            <span>Full Schedule</span>
+            <i data-icon="arrowRight" data-size="14"></i>
+          </a>
+        </div>
+
+        <div class="next-prayer-banner" id="nextPrayer">
+          <div>
+            <div class="next-prayer-label">Loading...</div>
+            <div class="next-prayer-name">Next Prayer</div>
+          </div>
+          <div class="next-prayer-time">--:--</div>
+        </div>
+
+        <div class="prayer-times-grid" id="prayerTimes">
+          <div class="spinner"></div>
+        </div>
+
+        <div style="margin-top:1.25rem; display:flex; gap:0.5rem; flex-wrap:wrap; align-items:center;">
+          <button class="btn btn-gold btn-small" onclick="markPrayerDone()">
+            <i data-icon="flame" data-size="16"></i>
+            <span>Mark Today's Prayer</span>
+          </button>
+          <label class="settings-toggle" title="Enable Azan notification at prayer times">
+            <input type="checkbox" id="azanToggle">
+            <span style="font-size:0.9rem; font-weight:600; color:var(--text-muted);">Azan Notifications</span>
+          </label>
+          <button class="btn btn-outline btn-small" id="testAzanBtn" title="Test Azan sound">
+            <i data-icon="lightning" data-size="14"></i>
+            <span>Test Azan</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Row 3: Streak + Hadith -->
+  <div class="bento-grid">
+    <div class="bento-card streak-card bento-4">
+      <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:0.5rem;">
+        <div style="display:flex; align-items:center; gap:0.5rem; font-size:0.85rem; color:var(--text-muted); font-weight:700; text-transform:uppercase; letter-spacing:0.1em;">
+          <i data-icon="flame" data-size="16" style="color:var(--gold);"></i>
+          <span>Prayer Streak</span>
+        </div>
+        <i data-icon="trophy" data-size="22" style="color:var(--gold);"></i>
+      </div>
+      <div class="streak-number" id="streakNumber">0</div>
+      <div class="streak-label">days in a row</div>
+      <div class="streak-days" id="streakDays"></div>
+    </div>
+
+    <div class="bento-8">
+      <div class="hadith-card" style="height:100%;">
+        <div style="display:flex; align-items:center; gap:0.5rem; font-size:0.85rem; font-weight:700; text-transform:uppercase; letter-spacing:0.1em; opacity:0.7; margin-bottom:1rem;">
+          <i data-icon="scroll" data-size="16"></i>
+          <span>Hadith of the Day</span>
+        </div>
+        <div id="dailyHadith">
+          <div class="spinner"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Row 4: Featured Premium Banners (Ramadan + Live Makkah) -->
+  <div class="bento-grid">
+    <a href="pages/ramadan.html" class="bento-card bento-6" style="background:linear-gradient(135deg, #7c3aed 0%, #5b21b6 50%, #4c1d95 100%); color:white; border:none; overflow:hidden; padding:2rem;">
+      <div class="geometric-overlay" style="opacity:0.15;"></div>
+      <div style="position:relative; z-index:1;">
+        <div style="display:inline-flex; align-items:center; gap:0.4rem; background:rgba(245, 158, 11, 0.2); color:var(--gold-light); padding:0.3rem 0.9rem; border-radius:999px; font-size:0.75rem; font-weight:800; letter-spacing:0.1em; margin-bottom:1rem;">
+          <i data-icon="moonStar" data-size="12"></i>
+          <span>RAMADAN</span>
+        </div>
+        <div class="bento-title" style="font-size:1.6rem; margin-bottom:0.4rem;">Ramadan Calendar</div>
+        <div class="bento-desc" style="color:rgba(255,255,255,0.85); margin-bottom:1rem;">Complete 30-day Sehri & Iftar schedule for your location. With duas & spiritual tips.</div>
+        <div class="arabic" style="font-size:1.6rem; color:var(--gold-light); margin-top:1rem;">شَهْرُ رَمَضَانَ</div>
+        <div class="bento-arrow" style="background:rgba(255,255,255,0.2);"><i data-icon="arrowRight" data-size="16"></i></div>
+      </div>
+    </a>
+
+    <a href="pages/live.html" class="bento-card bento-6" style="background:linear-gradient(135deg, #1e293b 0%, #0f172a 100%); color:white; border:none; overflow:hidden; padding:2rem;">
+      <div class="geometric-overlay" style="opacity:0.1;"></div>
+      <div style="position:relative; z-index:1;">
+        <div style="display:inline-flex; align-items:center; gap:0.4rem; background:rgba(239, 68, 68, 0.2); color:#fca5a5; padding:0.3rem 0.9rem; border-radius:999px; font-size:0.75rem; font-weight:800; letter-spacing:0.1em; margin-bottom:1rem;">
+          <span style="width:8px; height:8px; background:#ef4444; border-radius:50%; animation:pulse-dot 1.5s infinite;"></span>
+          <span>LIVE 24/7</span>
+        </div>
+        <div class="bento-title" style="font-size:1.6rem; margin-bottom:0.4rem;">Live from Makkah</div>
+        <div class="bento-desc" style="color:rgba(255,255,255,0.85); margin-bottom:1rem;">Watch live Quran recitation from Masjid al-Haram & Masjid an-Nabawi.</div>
+        <div class="arabic" style="font-size:1.6rem; color:var(--gold-light); margin-top:1rem;">مَكَّةُ ٱلْمُكَرَّمَةُ</div>
+        <div class="bento-arrow" style="background:rgba(255,255,255,0.2);"><i data-icon="arrowRight" data-size="16"></i></div>
+      </div>
+    </a>
+  </div>
+
+  <!-- Row 5: Mood Selector -->
+  <div class="bento-grid">
+    <div class="bento-12">
+      <div class="mood-selector">
+        <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:0.5rem; flex-wrap:wrap; gap:1rem;">
+          <div>
+            <div style="display:flex; align-items:center; gap:0.5rem; font-size:1.4rem; font-weight:800; letter-spacing:-0.02em;">
+              <i data-icon="heart" data-size="22" style="color:var(--rose);"></i>
+              <span>How Are You Feeling?</span>
+            </div>
+            <div style="color:var(--text-muted); font-size:0.95rem; margin-top:0.25rem;">Select your mood and get a personalized dua to calm your heart</div>
+          </div>
+          <div style="display:flex; align-items:center; gap:0.4rem; background:var(--emerald-50); color:var(--primary); padding:0.4rem 1rem; border-radius:999px; font-size:0.8rem; font-weight:700;">
+            <i data-icon="sparkle" data-size="14"></i>
+            <span>UNIQUE FEATURE</span>
+          </div>
+        </div>
+        <div class="mood-grid" id="moodGrid"></div>
+        <div id="moodResult"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Features Section Header -->
+  <div class="section-header" id="features">
+    <div class="section-eyebrow">
+      <i data-icon="lightning" data-size="14" style="vertical-align:-2px;"></i>
+      All Features
+    </div>
+    <h2 class="section-title">Everything You Need, <span class="gradient-text">Beautifully Designed</span></h2>
+    <p class="section-subtitle">Stop juggling 5 different apps. We've built every Islamic essential into one stunning experience.</p>
+  </div>
+
+  <!-- Features Bento -->
+  <div class="bento-grid">
+
+    <a href="pages/quran.html" class="bento-card featured-dark hover-glow bento-6">
+      <div class="bento-arrow"><i data-icon="arrowRight" data-size="16"></i></div>
+      <div style="position:relative; z-index:1;">
+        <div class="bento-icon"><i data-icon="book" data-size="26"></i></div>
+        <div class="bento-title" style="font-size:1.5rem;">Holy Quran</div>
+        <div class="bento-desc">All 114 Surahs with Arabic text & English translation. Search by name, number, or meaning.</div>
+        <div style="margin-top:1.5rem; display:flex; gap:0.5rem; flex-wrap:wrap;">
+          <span style="background:rgba(255,255,255,0.15); padding:0.3rem 0.75rem; border-radius:999px; font-size:0.75rem; font-weight:600;">114 Surahs</span>
+          <span style="background:rgba(255,255,255,0.15); padding:0.3rem 0.75rem; border-radius:999px; font-size:0.75rem; font-weight:600;">6,236 Verses</span>
+        </div>
+      </div>
+    </a>
+
+    <a href="pages/prayer.html" class="bento-card hover-glow bento-3">
+      <div class="bento-arrow"><i data-icon="arrowRight" data-size="16"></i></div>
+      <div class="bento-icon"><i data-icon="mosque" data-size="26" style="color:var(--primary);"></i></div>
+      <div class="bento-title">Prayer Times</div>
+      <div class="bento-desc">Auto-detect location for accurate daily salah timings.</div>
+    </a>
+
+    <a href="pages/qibla.html" class="bento-card featured-gold hover-glow bento-3">
+      <div class="bento-arrow"><i data-icon="arrowRight" data-size="16"></i></div>
+      <div class="bento-icon" style="background:rgba(255,255,255,0.6);"><i data-icon="compass" data-size="26" style="color:var(--gold-dark);"></i></div>
+      <div class="bento-title">Qibla Direction</div>
+      <div class="bento-desc">Live compass pointing to Makkah.</div>
+    </a>
+
+    <a href="pages/tasbih.html" class="bento-card hover-glow bento-3">
+      <div class="bento-arrow"><i data-icon="arrowRight" data-size="16"></i></div>
+      <div class="bento-icon"><i data-icon="beads" data-size="26" style="color:var(--primary);"></i></div>
+      <div class="bento-title">Digital Tasbih</div>
+      <div class="bento-desc">Count dhikr with haptic feedback. Saves automatically.</div>
+    </a>
+
+    <a href="pages/duas.html" class="bento-card hover-glow bento-3">
+      <div class="bento-arrow"><i data-icon="arrowRight" data-size="16"></i></div>
+      <div class="bento-icon"><i data-icon="hands" data-size="26" style="color:var(--primary);"></i></div>
+      <div class="bento-title">Daily Duas</div>
+      <div class="bento-desc">Authentic supplications categorized by occasion.</div>
+    </a>
+
+    <a href="pages/names.html" class="bento-card featured-emerald hover-glow bento-6">
+      <div class="bento-arrow"><i data-icon="arrowRight" data-size="16"></i></div>
+      <div style="position:relative; z-index:1;">
+        <div class="bento-icon"><i data-icon="sparkle" data-size="26"></i></div>
+        <div class="bento-title" style="font-size:1.5rem;">99 Beautiful Names of Allah</div>
+        <div class="bento-desc">Learn the Asma-ul-Husna with Arabic, transliteration, and meanings — all searchable.</div>
+        <div style="margin-top:1rem; font-family:'Amiri Quran',serif; font-size:1.8rem; direction:rtl; opacity:0.95;">الرَّحْمَنُ • الرَّحِيمُ • الْمَلِكُ</div>
+      </div>
+    </a>
+
+    <a href="pages/zakat.html" class="bento-card hover-glow bento-3">
+      <div class="bento-arrow"><i data-icon="arrowRight" data-size="16"></i></div>
+      <div class="bento-icon"><i data-icon="coin" data-size="26" style="color:var(--gold-dark);"></i></div>
+      <div class="bento-title">Zakat Calculator</div>
+      <div class="bento-desc">7 currencies. Accurate Nisab calculation.</div>
+    </a>
+
+    <a href="pages/hadith.html" class="bento-card hover-glow bento-3">
+      <div class="bento-arrow"><i data-icon="arrowRight" data-size="16"></i></div>
+      <div class="bento-icon"><i data-icon="scroll" data-size="26" style="color:var(--primary);"></i></div>
+      <div class="bento-title">Hadith Library</div>
+      <div class="bento-desc">Authentic hadiths from Bukhari, Muslim & more.</div>
+    </a>
+
+    <a href="pages/learn.html" class="bento-card hover-glow bento-3" style="background:linear-gradient(135deg, #0ea5e9, #0369a1); color:white; border:none;">
+      <div class="bento-arrow" style="background:rgba(255,255,255,0.2);"><i data-icon="arrowRight" data-size="16"></i></div>
+      <div class="bento-icon" style="background:rgba(255,255,255,0.15);"><i data-icon="sparkle" data-size="26"></i></div>
+      <div class="bento-title">Learn Quran</div>
+      <div class="bento-desc" style="color:rgba(255,255,255,0.85);">Alphabet, Tajweed, memorize surahs — from zero to fluent.</div>
+    </a>
+
+    <a href="pages/ramadan.html" class="bento-card hover-glow bento-3">
+      <div class="bento-arrow"><i data-icon="arrowRight" data-size="16"></i></div>
+      <div class="bento-icon"><i data-icon="moonStar" data-size="26" style="color:#7c3aed;"></i></div>
+      <div class="bento-title">Ramadan</div>
+      <div class="bento-desc">Sehri & Iftar times for all 30 days.</div>
+    </a>
+
+    <a href="pages/live.html" class="bento-card hover-glow bento-3">
+      <div class="bento-arrow"><i data-icon="arrowRight" data-size="16"></i></div>
+      <div class="bento-icon"><i data-icon="mosque" data-size="26" style="color:#ef4444;"></i></div>
+      <div class="bento-title">Live Makkah</div>
+      <div class="bento-desc">24/7 live stream from the holy mosques.</div>
+    </a>
+
+    <a href="pages/prayer.html" class="bento-card hover-glow bento-3">
+      <div class="bento-arrow"><i data-icon="arrowRight" data-size="16"></i></div>
+      <div class="bento-icon"><i data-icon="calendar" data-size="26" style="color:var(--primary);"></i></div>
+      <div class="bento-title">Hijri Calendar</div>
+      <div class="bento-desc">Always know today's Islamic date.</div>
+    </a>
+
+  </div>
+
+  <!-- Why Choose Us -->
+  <div class="section-header">
+    <div class="section-eyebrow">Why Noor-ul-Iman</div>
+    <h2 class="section-title">Different from <span class="gradient-text">Every Other</span> Islamic App</h2>
+  </div>
+
+  <div class="bento-grid">
+
+    <div class="bento-card bento-4">
+      <div class="bento-icon" style="background:linear-gradient(135deg, #fef3c7, #fbbf24);">
+        <i data-icon="palette" data-size="26" style="color:white;"></i>
+      </div>
+      <div class="bento-title">Premium Design</div>
+      <div class="bento-desc">Other Islamic apps look outdated. We built ours like a billion-dollar Silicon Valley product — beautiful, intuitive, modern.</div>
+    </div>
+
+    <div class="bento-card bento-4">
+      <div class="bento-icon" style="background:linear-gradient(135deg, #ddd6fe, #8b5cf6);">
+        <i data-icon="heart" data-size="26" style="color:white;"></i>
+      </div>
+      <div class="bento-title">Mood-Based Duas</div>
+      <div class="bento-desc">First-of-its-kind feature. Tell us how you feel and get an authentic dua from the Sunnah that addresses exactly that state.</div>
+    </div>
+
+    <div class="bento-card bento-4">
+      <div class="bento-icon" style="background:linear-gradient(135deg, #fecaca, #f43f5e);">
+        <i data-icon="flame" data-size="26" style="color:white;"></i>
+      </div>
+      <div class="bento-title">Prayer Streak Tracker</div>
+      <div class="bento-desc">Stay consistent with gamified habit tracking — see your daily prayer streak grow and never miss a day.</div>
+    </div>
+
+    <div class="bento-card bento-4">
+      <div class="bento-icon" style="background:linear-gradient(135deg, #bae6fd, #0ea5e9);">
+        <i data-icon="phone" data-size="26" style="color:white;"></i>
+      </div>
+      <div class="bento-title">Works Everywhere</div>
+      <div class="bento-desc">Web, Android, iOS, desktop — same beautiful experience. No ads disrupting your worship. No paywalls.</div>
+    </div>
+
+    <div class="bento-card bento-4">
+      <div class="bento-icon" style="background:linear-gradient(135deg, #d1fae5, #10b981);">
+        <i data-icon="globe" data-size="26" style="color:white;"></i>
+      </div>
+      <div class="bento-title">All-in-One</div>
+      <div class="bento-desc">Stop using 5 apps. Quran, prayer, qibla, duas, tasbih, hadith, zakat — everything in one elegant interface.</div>
+    </div>
+
+    <div class="bento-card bento-4">
+      <div class="bento-icon" style="background:linear-gradient(135deg, #fed7aa, #f59e0b);">
+        <i data-icon="lightning" data-size="26" style="color:white;"></i>
+      </div>
+      <div class="bento-title">Lightning Fast</div>
+      <div class="bento-desc">Loads in under 1 second. Works offline (PWA). Minimal data usage — perfect for any device, any connection.</div>
+    </div>
+
+  </div>
+
+  <!-- CTA Card -->
+  <div class="bento-grid" style="margin-top:3rem;">
+    <div class="bento-12">
+      <div class="bento-card featured-dark" style="text-align:center; padding:4rem 2rem;">
+        <div class="geometric-overlay" style="opacity:0.1;"></div>
+        <div style="position:relative; z-index:1;">
+          <div style="font-family:'Amiri Quran',serif; font-size:2.2rem; color:var(--gold-light); margin-bottom:1rem;">رَبِّ زِدْنِي عِلْمًا</div>
+          <h2 style="font-size:clamp(1.8rem, 4vw, 2.8rem); font-weight:800; margin-bottom:1rem; letter-spacing:-0.02em;">
+            "My Lord, increase me in knowledge"
+          </h2>
+          <p style="opacity:0.85; max-width:600px; margin:0 auto 2rem; font-size:1.05rem;">
+            Begin your journey today. The Quran is waiting for you.
+          </p>
+          <a href="pages/quran.html" class="btn btn-gold">
+            <i data-icon="book" data-size="18"></i>
+            <span>Start Reading Now</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="footer-content">
+    <div class="footer-brand">
+      <h3 style="display:inline-flex; align-items:center; gap:0.5rem;">
+        <i data-icon="crescent" data-size="28"></i>
+        <span>Noor-ul-Iman</span>
+      </h3>
+      <p>The most beautifully designed Islamic web app for the modern Muslim. Quran, prayer, and remembrance — all in one place. Free forever, made with love for the Ummah.</p>
+    </div>
+    <div class="footer-section">
+      <h4>Features</h4>
+      <ul>
+        <li><a href="pages/quran.html">Quran</a></li>
+        <li><a href="pages/prayer.html">Prayer Times</a></li>
+        <li><a href="pages/qibla.html">Qibla</a></li>
+        <li><a href="pages/tasbih.html">Tasbih</a></li>
+      </ul>
+    </div>
+    <div class="footer-section">
+      <h4>Resources</h4>
+      <ul>
+        <li><a href="pages/duas.html">Duas</a></li>
+        <li><a href="pages/names.html">99 Names</a></li>
+        <li><a href="pages/zakat.html">Zakat</a></li>
+      </ul>
+    </div>
+    <div class="footer-section">
+      <h4>Support</h4>
+      <ul>
+        <li><a href="#">About</a></li>
+        <li><a href="#">Privacy</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 Noor-ul-Iman — Made for the Ummah</p>
+    <p class="quote">"And whoever relies upon Allah — then He is sufficient for him." — Quran 65:3</p>
+  </div>
+</footer>
+
+<script src="js/icons.js"></script>
+<script src="data/daily.js"></script>
+<script src="data/azan-dua.js"></script>
+<script src="js/app.js"></script>
+<script src="js/azan.js"></script>
+
+</body>
+</html>

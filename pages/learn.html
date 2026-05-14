@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Learn Quran from scratch — Arabic alphabet, Tajweed rules, beginner surah memorization with audio. Complete Quran learning system.">
+  <title>Learn Quran (Shikkhanur Bebostha) — Noor-ul-Iman</title>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700;800&family=Amiri+Quran&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="manifest" href="../manifest.json">
+  <meta name="theme-color" content="#10b981">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/pages.css">
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="nav-container">
+    <a href="../index.html" class="nav-logo">
+      <div class="nav-logo-icon">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </div>
+      <span class="nav-logo-text">Noor-ul-Iman</span>
+    </a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="quran.html">Quran</a></li>
+      <li><a href="learn.html" class="active">Learn</a></li>
+      <li><a href="prayer.html">Prayer</a></li>
+      <li><a href="ramadan.html">Ramadan</a></li>
+      <li><a href="live.html">Live Makkah</a></li>
+      <li><a href="duas.html">Duas</a></li>
+      <li><a href="hadith.html">Hadith</a></li>
+    </ul>
+    <div style="display:flex; gap:0.5rem; align-items:center;">
+      <button class="theme-toggle" id="themeToggle"><i data-icon="moon"></i></button>
+      <button class="menu-toggle" id="menuToggle"><i data-icon="menu"></i></button>
+    </div>
+  </div>
+</nav>
+
+<div class="page-header" style="background:linear-gradient(135deg, #0ea5e9 0%, #0369a1 50%, #1e3a8a 100%);">
+  <div class="geometric-overlay" style="color:white;"></div>
+  <h1 style="display:flex; align-items:center; justify-content:center; gap:0.75rem; position:relative;">
+    <i data-icon="book" data-size="36"></i>
+    <span>Learn Quran</span>
+  </h1>
+  <p style="position:relative;">Quran Shikkhanur Bebostha — From alphabet to fluent reading</p>
+  <div class="arabic" style="font-size:1.6rem; margin-top:1rem; color:var(--gold-light); position:relative;">رَبِّ زِدْنِي عِلْمًا</div>
+  <p style="font-style:italic; opacity:0.9; margin-top:0.5rem; position:relative;">"My Lord, increase me in knowledge" — Quran 20:114</p>
+</div>
+
+<div class="container">
+
+  <!-- Learning Path Overview -->
+  <div class="bento-grid">
+    <div class="bento-card featured-emerald bento-3">
+      <div class="bento-icon"><i data-icon="sparkle" data-size="26"></i></div>
+      <div class="bento-title">Step 1: Alphabet</div>
+      <div class="bento-desc">Learn all 28 Arabic letters with examples & pronunciation.</div>
+    </div>
+    <div class="bento-card featured-gold bento-3">
+      <div class="bento-icon" style="background:rgba(255,255,255,0.5);"><i data-icon="settings" data-size="26" style="color:var(--gold-dark);"></i></div>
+      <div class="bento-title">Step 2: Harakat</div>
+      <div class="bento-desc">Learn vowel marks (Fatha, Kasra, Damma) to read words.</div>
+    </div>
+    <div class="bento-card featured-dark bento-3">
+      <div class="bento-icon"><i data-icon="palette" data-size="26"></i></div>
+      <div class="bento-title">Step 3: Tajweed</div>
+      <div class="bento-desc">Master pronunciation rules for proper recitation.</div>
+    </div>
+    <div class="bento-card bento-3" style="background:linear-gradient(135deg, #ef4444, #b91c1c); color:white; border:none;">
+      <div class="bento-icon" style="background:rgba(255,255,255,0.15);"><i data-icon="book" data-size="26"></i></div>
+      <div class="bento-title">Step 4: Memorize</div>
+      <div class="bento-desc">Start memorizing short surahs with audio.</div>
+    </div>
+  </div>
+
+  <!-- Tabs Navigation -->
+  <div class="learn-tabs">
+    <button class="learn-tab active" data-tab="alphabet" onclick="switchTab('alphabet')">
+      <i data-icon="sparkle" data-size="16"></i>
+      <span>Alphabet (28 Letters)</span>
+    </button>
+    <button class="learn-tab" data-tab="harakat" onclick="switchTab('harakat')">
+      <i data-icon="settings" data-size="16"></i>
+      <span>Harakat (Vowels)</span>
+    </button>
+    <button class="learn-tab" data-tab="tajweed" onclick="switchTab('tajweed')">
+      <i data-icon="palette" data-size="16"></i>
+      <span>Tajweed Rules</span>
+    </button>
+    <button class="learn-tab" data-tab="surahs" onclick="switchTab('surahs')">
+      <i data-icon="book" data-size="16"></i>
+      <span>Memorize Surahs</span>
+    </button>
+    <button class="learn-tab" data-tab="vocab" onclick="switchTab('vocab')">
+      <i data-icon="globe" data-size="16"></i>
+      <span>Common Words</span>
+    </button>
+  </div>
+
+  <!-- Tab Contents -->
+
+  <!-- Alphabet Tab -->
+  <div class="learn-tab-content active" id="tab-alphabet">
+    <div style="background:linear-gradient(135deg, rgba(14, 165, 233, 0.1), rgba(14, 165, 233, 0.03)); border-left:4px solid #0ea5e9; padding:1.25rem; border-radius:8px; margin-bottom:1.5rem;">
+      <strong>📌 Tip:</strong> Click any letter to hear its pronunciation. The Arabic alphabet has 28 letters and is written from right to left.
+    </div>
+    <div class="alphabet-grid" id="alphabetGrid"></div>
+  </div>
+
+  <!-- Harakat Tab -->
+  <div class="learn-tab-content" id="tab-harakat">
+    <div style="background:linear-gradient(135deg, rgba(245, 158, 11, 0.1), rgba(245, 158, 11, 0.03)); border-left:4px solid var(--gold); padding:1.25rem; border-radius:8px; margin-bottom:1.5rem;">
+      <strong>📌 What are Harakat?</strong> Arabic letters don't have built-in vowels. Harakat (diacritical marks) tell you how to pronounce each letter. Master these to read any Arabic word!
+    </div>
+    <div class="harakat-grid" id="harakatGrid"></div>
+  </div>
+
+  <!-- Tajweed Tab -->
+  <div class="learn-tab-content" id="tab-tajweed">
+    <div style="background:linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(139, 92, 246, 0.03)); border-left:4px solid #8b5cf6; padding:1.25rem; border-radius:8px; margin-bottom:1.5rem;">
+      <strong>📌 What is Tajweed?</strong> Tajweed means "to improve" — it's the science of correctly pronouncing the Quran. These rules ensure each letter is pronounced from its proper place with proper attributes.
+    </div>
+    <div id="tajweedList"></div>
+  </div>
+
+  <!-- Surahs Tab -->
+  <div class="learn-tab-content" id="tab-surahs">
+    <div style="background:linear-gradient(135deg, rgba(239, 68, 68, 0.1), rgba(239, 68, 68, 0.03)); border-left:4px solid #ef4444; padding:1.25rem; border-radius:8px; margin-bottom:1.5rem;">
+      <strong>📌 Memorization Tips:</strong> Start with the shortest surahs. Listen to the audio multiple times before reading. Repeat each verse 10 times daily. Aim to memorize 1 short surah per week.
+    </div>
+    <div class="surah-list" id="learnSurahList"></div>
+  </div>
+
+  <!-- Vocab Tab -->
+  <div class="learn-tab-content" id="tab-vocab">
+    <div style="background:linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(16, 185, 129, 0.03)); border-left:4px solid var(--primary); padding:1.25rem; border-radius:8px; margin-bottom:1.5rem;">
+      <strong>📌 Why learn vocabulary?</strong> Just 100 words make up over 50% of the Quran! Learn these high-frequency words to understand the Quran while reading.
+    </div>
+    <div class="vocab-grid" id="vocabGrid"></div>
+  </div>
+
+  <!-- CTA -->
+  <div class="bento-grid" style="margin-top:3rem;">
+    <div class="bento-12">
+      <div class="bento-card featured-dark" style="text-align:center; padding:3rem 2rem;">
+        <div class="geometric-overlay" style="opacity:0.1;"></div>
+        <div style="position:relative; z-index:1;">
+          <div class="arabic" style="font-size:1.8rem; color:var(--gold-light); margin-bottom:1rem;">خَيْرُكُمْ مَنْ تَعَلَّمَ الْقُرْآنَ وَعَلَّمَهُ</div>
+          <h2 style="font-size:clamp(1.5rem, 3vw, 2.2rem); font-weight:800; margin-bottom:1rem;">
+            "The best of you are those who learn the Quran and teach it"
+          </h2>
+          <p style="opacity:0.85; max-width:600px; margin:0 auto 2rem;">
+            — Prophet Muhammad ﷺ (Sahih Bukhari 5027)
+          </p>
+          <a href="quran.html" class="btn btn-gold">
+            <i data-icon="book" data-size="18"></i>
+            <span>Open Full Quran</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<footer class="footer">
+  <div class="footer-bottom">
+    <p>© 2026 Noor-ul-Iman — Quran learning system for beginners</p>
+  </div>
+</footer>
+
+<script src="../js/icons.js"></script>
+<script src="../data/learn.js"></script>
+<script src="../data/azan-dua.js"></script>
+<script src="../js/app.js"></script>
+<script src="../js/azan.js"></script>
+<script>
+// ====== Audio Helpers ======
+const beginnerReciter = 'ar.alafasy';
+let currentLearnAudio = null;
+
+function playLetterAudio(letter, name) {
+  // Use text-to-speech for letters (Web Speech API)
+  if ('speechSynthesis' in window) {
+    speechSynthesis.cancel();
+    const utterance = new SpeechSynthesisUtterance(letter);
+    utterance.lang = 'ar-SA';
+    utterance.rate = 0.6;
+    speechSynthesis.speak(utterance);
+    if (window.showToast) window.showToast(`Playing: ${name}`);
+  }
+}
+
+async function playSurahAudio(num, btn) {
+  if (currentLearnAudio && !currentLearnAudio.paused) {
+    currentLearnAudio.pause();
+    document.querySelectorAll('.surah-card .audio-play-btn').forEach(b => {
+      b.innerHTML = window.Icons.lightning.replace('<svg', '<svg width="20" height="20" class="icon"');
+    });
+    return;
+  }
+
+  if (currentLearnAudio) currentLearnAudio = null;
+
+  const url = `https://cdn.islamic.network/quran/audio-surah/128/${beginnerReciter}/${num}.mp3`;
+  currentLearnAudio = new Audio(url);
+  currentLearnAudio.volume = 0.85;
+
+  if (window.showToast) window.showToast('Loading audio...');
+
+  currentLearnAudio.addEventListener('playing', () => {
+    if (window.showToast) window.showToast('Playing audio');
+    btn.innerHTML = `<svg width="20" height="20" class="icon" viewBox="0 0 24 24" fill="white"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg>`;
+  });
+
+  currentLearnAudio.addEventListener('ended', () => {
+    btn.innerHTML = window.Icons.lightning.replace('<svg', '<svg width="20" height="20" class="icon"');
+  });
+
+  currentLearnAudio.addEventListener('error', () => {
+    if (window.showToast) window.showToast('Audio failed to load.');
+  });
+
+  currentLearnAudio.play().catch(() => {
+    if (window.showToast) window.showToast('Click again to play (browser security).');
+  });
+}
+
+// ====== Render Functions ======
+function renderAlphabet() {
+  const grid = document.getElementById('alphabetGrid');
+  if (!grid) return;
+  grid.innerHTML = arabicAlphabet.map((l, i) => `
+    <div class="alphabet-card" onclick="playLetterAudio('${l.letter}', '${l.name}')">
+      <div class="alphabet-letter">${l.letter}</div>
+      <div class="alphabet-name">${l.name}</div>
+      <div class="alphabet-trans">${l.transliteration}</div>
+      <div class="alphabet-example">${l.example}</div>
+      <div class="alphabet-number">${i + 1}</div>
+    </div>
+  `).join('');
+}
+
+function renderHarakat() {
+  const grid = document.getElementById('harakatGrid');
+  if (!grid) return;
+  grid.innerHTML = harakatMarks.map(h => `
+    <div class="harakat-card">
+      <div class="harakat-display">${h.mark}</div>
+      <div class="harakat-info">
+        <div class="harakat-name">${h.name}</div>
+        <div class="harakat-sound">${h.sound}</div>
+        <div class="harakat-desc">${h.desc}</div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function renderTajweed() {
+  const container = document.getElementById('tajweedList');
+  if (!container) return;
+  container.innerHTML = tajweedRules.map(r => `
+    <div class="tajweed-card" style="border-left:4px solid ${r.color};">
+      <div class="tajweed-header">
+        <div class="tajweed-icon" style="background:${r.color};">${r.title[0]}</div>
+        <div>
+          <div class="tajweed-title">${r.title}</div>
+          <div class="tajweed-desc">${r.desc}</div>
+        </div>
+      </div>
+      <div class="tajweed-rule">
+        <strong>Rule:</strong> ${r.rule}
+      </div>
+      <div class="tajweed-example">
+        <strong>Example:</strong>
+        <div class="arabic" style="font-size:1.8rem; margin-top:0.5rem; color:${r.color};">${r.example.split(' — ')[0]}</div>
+        <div style="font-size:0.9rem; color:var(--text-muted); margin-top:0.4rem;">${r.example.split(' — ')[1] || ''}</div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function renderBeginnerSurahs() {
+  const container = document.getElementById('learnSurahList');
+  if (!container) return;
+  container.innerHTML = beginnerSurahs.map(s => `
+    <div class="surah-card learn-surah-card">
+      <div class="surah-number">${s.number}</div>
+      <div class="surah-info">
+        <div class="surah-name-en">${s.name} — ${s.english}</div>
+        <div class="surah-meta">${s.verses} verses • ${s.level} • Priority #${s.priority}</div>
+        <div style="font-size:0.85rem; color:var(--text-muted); margin-top:0.4rem;">${s.desc}</div>
+      </div>
+      <div style="display:flex; flex-direction:column; gap:0.5rem; align-items:center;">
+        <button class="audio-play-btn" onclick="playSurahAudio(${s.number}, this)" title="Listen">
+          <i data-icon="lightning" data-size="18"></i>
+        </button>
+        <a href="quran.html#surah-${s.number}" onclick="localStorage.setItem('autoOpenSurah', ${s.number})" class="btn btn-outline btn-small" style="padding:0.3rem 0.8rem; font-size:0.75rem;">Read</a>
+      </div>
+    </div>
+  `).join('');
+  if (window.injectIcons) window.injectIcons();
+}
+
+function renderVocab() {
+  const grid = document.getElementById('vocabGrid');
+  if (!grid) return;
+  grid.innerHTML = quranicVocabulary.map(v => `
+    <div class="vocab-card">
+      <div class="vocab-arabic">${v.arabic}</div>
+      <div class="vocab-trans">${v.trans}</div>
+      <div class="vocab-meaning">${v.meaning}</div>
+      <div class="vocab-count">Repeated ${v.count}</div>
+    </div>
+  `).join('');
+}
+
+function switchTab(name) {
+  document.querySelectorAll('.learn-tab').forEach(t => t.classList.remove('active'));
+  document.querySelector(`[data-tab="${name}"]`)?.classList.add('active');
+
+  document.querySelectorAll('.learn-tab-content').forEach(c => c.classList.remove('active'));
+  document.getElementById(`tab-${name}`)?.classList.add('active');
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  renderAlphabet();
+  renderHarakat();
+  renderTajweed();
+  renderBeginnerSurahs();
+  renderVocab();
+});
+</script>
+</body>
+</html>

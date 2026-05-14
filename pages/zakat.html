@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Zakat Calculator — Noor-ul-Iman</title>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700;800&family=Amiri+Quran&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="manifest" href="../manifest.json">
+  <meta name="theme-color" content="#10b981">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/pages.css">
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="nav-container">
+    <a href="../index.html" class="nav-logo">
+      <div class="nav-logo-icon">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </div>
+      <span class="nav-logo-text">Noor-ul-Iman</span>
+    </a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="quran.html">Quran</a></li>
+      <li><a href="learn.html">Learn</a></li>
+      <li><a href="prayer.html">Prayer</a></li>
+      <li><a href="ramadan.html">Ramadan</a></li>
+      <li><a href="live.html">Live Makkah</a></li>
+      <li><a href="qibla.html">Qibla</a></li>
+      <li><a href="duas.html">Duas</a></li>
+      <li><a href="hadith.html">Hadith</a></li>
+      <li><a href="tasbih.html">Tasbih</a></li>
+      <li><a href="zakat.html">Zakat</a></li>
+    </ul>
+    <div style="display:flex; gap:0.5rem; align-items:center;">
+      <button class="theme-toggle" id="themeToggle"><i data-icon="moon"></i></button>
+      <button class="menu-toggle" id="menuToggle"><i data-icon="menu"></i></button>
+    </div>
+  </div>
+</nav>
+
+<div class="page-header">
+  <h1 style="display:flex; align-items:center; justify-content:center; gap:0.75rem;">
+    <i data-icon="coin" data-size="36"></i>
+    <span>Zakat Calculator</span>
+  </h1>
+  <p>Calculate your annual zakat — 2.5% of wealth above Nisab</p>
+</div>
+
+<div class="container">
+  <div class="zakat-container">
+    <div class="zakat-info-box">
+      <div style="display:flex; align-items:flex-start; gap:0.75rem;">
+        <i data-icon="coin" data-size="22" style="color:var(--gold-dark); flex-shrink:0; margin-top:2px;"></i>
+        <div><strong>About Zakat:</strong> Zakat is 2.5% of wealth held for one lunar year, above the Nisab threshold (87.48 grams of gold). It's one of the 5 pillars of Islam.</div>
+      </div>
+    </div>
+
+    <div class="calculator-card">
+      <h2 style="color:var(--primary); margin-bottom:1.5rem;">Enter Your Wealth Details</h2>
+
+      <div class="form-group">
+        <label>Currency</label>
+        <select id="currency">
+          <option value="BDT">BDT (৳) — Bangladeshi Taka</option>
+          <option value="USD">USD ($) — US Dollar</option>
+          <option value="SAR">SAR — Saudi Riyal</option>
+          <option value="EUR">EUR (€) — Euro</option>
+          <option value="GBP">GBP (£) — British Pound</option>
+          <option value="INR">INR (₹) — Indian Rupee</option>
+          <option value="PKR">PKR — Pakistani Rupee</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>Current Gold Price (per gram)</label>
+        <input type="number" id="goldPrice" placeholder="e.g., 6500" value="6500">
+      </div>
+
+      <h3 style="color:var(--primary); margin: 1.5rem 0 1rem; display:flex; align-items:center; gap:0.5rem; font-weight:800;">
+        <i data-icon="chart" data-size="20"></i>
+        <span>Assets</span>
+      </h3>
+
+      <div class="form-group">
+        <label style="display:flex; align-items:center; gap:0.5rem;"><i data-icon="cash" data-size="16"></i> Cash in Hand</label>
+        <input type="number" id="cash" placeholder="0">
+      </div>
+
+      <div class="form-group">
+        <label style="display:flex; align-items:center; gap:0.5rem;"><i data-icon="bank" data-size="16"></i> Bank Balance / Savings</label>
+        <input type="number" id="bank" placeholder="0">
+      </div>
+
+      <div class="form-group">
+        <label style="display:flex; align-items:center; gap:0.5rem;"><i data-icon="coin" data-size="16"></i> Gold (in grams)</label>
+        <input type="number" id="gold" placeholder="0">
+      </div>
+
+      <div class="form-group">
+        <label style="display:flex; align-items:center; gap:0.5rem;"><i data-icon="coin" data-size="16"></i> Silver (in grams)</label>
+        <input type="number" id="silver" placeholder="0">
+      </div>
+
+      <div class="form-group">
+        <label style="display:flex; align-items:center; gap:0.5rem;"><i data-icon="chart" data-size="16"></i> Investments / Stocks</label>
+        <input type="number" id="investments" placeholder="0">
+      </div>
+
+      <div class="form-group">
+        <label style="display:flex; align-items:center; gap:0.5rem;"><i data-icon="building" data-size="16"></i> Business Assets / Inventory</label>
+        <input type="number" id="business" placeholder="0">
+      </div>
+
+      <div class="form-group">
+        <label style="display:flex; align-items:center; gap:0.5rem;"><i data-icon="creditCard" data-size="16"></i> Money Lent to Others (will be received)</label>
+        <input type="number" id="loans" placeholder="0">
+      </div>
+
+      <h3 style="color:var(--primary); margin: 1.5rem 0 1rem; display:flex; align-items:center; gap:0.5rem; font-weight:800;">
+        <i data-icon="creditCard" data-size="20"></i>
+        <span>Liabilities</span>
+      </h3>
+
+      <div class="form-group">
+        <label style="display:flex; align-items:center; gap:0.5rem;"><i data-icon="creditCard" data-size="16"></i> Debts / Loans to Repay</label>
+        <input type="number" id="debts" placeholder="0">
+      </div>
+
+      <div style="display:flex; gap:1rem; flex-wrap:wrap; margin-top:1.5rem;">
+        <button class="btn" id="calculateBtn" style="flex:1; min-width:160px;">
+          <i data-icon="coin" data-size="16"></i>
+          <span>Calculate Zakat</span>
+        </button>
+        <button class="btn btn-outline" id="resetBtn">
+          <i data-icon="refresh" data-size="16"></i>
+          <span>Reset</span>
+        </button>
+      </div>
+    </div>
+
+    <div class="zakat-result" id="zakatResult">
+      <div id="zakatResultContent"></div>
+    </div>
+
+    <div class="zakat-info-box" style="margin-top:2rem;">
+      <strong>The 8 Categories of Zakat Recipients (Quran 9:60):</strong>
+      <ol style="margin-top:0.75rem; padding-left:1.5rem; line-height:1.9;">
+        <li>The poor (Al-Fuqara)</li>
+        <li>The needy (Al-Masakin)</li>
+        <li>Those employed to administer zakat</li>
+        <li>Those whose hearts are to be reconciled</li>
+        <li>To free slaves</li>
+        <li>Those in debt</li>
+        <li>In the cause of Allah</li>
+        <li>The wayfarer (traveler)</li>
+      </ol>
+    </div>
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="footer-bottom">
+    <p>© 2026 Noor-ul-Iman. Calculations follow Hanafi/Shafi'i guidelines. Consult your local scholar for specific cases.</p>
+  </div>
+</footer>
+
+<script src="../js/icons.js"></script>
+<script src="../data/azan-dua.js"></script>
+<script src="../js/app.js"></script>
+<script src="../js/azan.js"></script>
+<script src="../js/zakat.js"></script>
+</body>
+</html>

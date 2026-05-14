@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Prayer Times — Noor-ul-Iman</title>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700;800&family=Amiri+Quran&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="manifest" href="../manifest.json">
+  <meta name="theme-color" content="#10b981">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/pages.css">
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="nav-container">
+    <a href="../index.html" class="nav-logo">
+      <div class="nav-logo-icon">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </div>
+      <span class="nav-logo-text">Noor-ul-Iman</span>
+    </a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="quran.html">Quran</a></li>
+      <li><a href="learn.html">Learn</a></li>
+      <li><a href="prayer.html">Prayer</a></li>
+      <li><a href="ramadan.html">Ramadan</a></li>
+      <li><a href="live.html">Live Makkah</a></li>
+      <li><a href="qibla.html">Qibla</a></li>
+      <li><a href="duas.html">Duas</a></li>
+      <li><a href="hadith.html">Hadith</a></li>
+      <li><a href="tasbih.html">Tasbih</a></li>
+      <li><a href="zakat.html">Zakat</a></li>
+    </ul>
+    <div style="display:flex; gap:0.5rem; align-items:center;">
+      <button class="theme-toggle" id="themeToggle"><i data-icon="moon"></i></button>
+      <button class="menu-toggle" id="menuToggle"><i data-icon="menu"></i></button>
+    </div>
+  </div>
+</nav>
+
+<div class="page-header">
+  <h1 style="display:flex; align-items:center; justify-content:center; gap:0.75rem;">
+    <i data-icon="mosque" data-size="36"></i>
+    <span>Prayer Times</span>
+  </h1>
+  <p>Accurate daily prayer times for your location</p>
+</div>
+
+<div class="container">
+  <div class="hijri-display" id="hijriDate">
+    <div class="spinner"></div>
+  </div>
+
+  <div class="prayer-widget">
+    <div class="prayer-widget-header">
+      <div>
+        <div class="prayer-widget-title">
+          <i data-icon="mosque" data-size="22" style="color:var(--primary);"></i>
+          <span>Today's Salah Schedule</span>
+        </div>
+        <div class="prayer-location" id="prayerLocation">Loading location...</div>
+      </div>
+      <div class="live-clock-display" id="liveClock" style="font-size:1.5rem;">--:--</div>
+    </div>
+
+    <div class="next-prayer-banner" id="nextPrayer">
+      <div>
+        <div class="next-prayer-label">Loading...</div>
+        <div class="next-prayer-name">Next Prayer</div>
+      </div>
+      <div class="next-prayer-time">--:--</div>
+    </div>
+
+    <div class="prayer-times-grid" id="prayerTimes">
+      <div class="spinner"></div>
+    </div>
+  </div>
+
+  <div class="prayer-widget" style="margin-top:2rem;">
+    <h3 style="color:var(--primary); margin-bottom:1rem; display:flex; align-items:center; gap:0.5rem;">
+      <i data-icon="settings" data-size="20"></i>
+      <span>About Prayer Times</span>
+    </h3>
+    <p style="color:var(--text-muted); line-height:1.8;">
+      Prayer times are calculated based on your geographical location using the Muslim World League calculation method. Please allow location access for accurate timings. If location is not available, times will default to Dhaka, Bangladesh.
+    </p>
+
+    <div style="margin-top:1.5rem; display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:1rem;">
+      <div style="padding:1.25rem; background:var(--bg); border-radius:var(--radius-sm); border-left:4px solid var(--primary);">
+        <div style="display:flex; align-items:center; gap:0.5rem; margin-bottom:0.5rem;">
+          <i data-icon="sunrise" data-size="22" style="color:var(--primary);"></i>
+          <strong>Fajr</strong>
+        </div>
+        <p style="font-size:0.9rem; color:var(--text-muted);">Dawn prayer, before sunrise</p>
+      </div>
+      <div style="padding:1.25rem; background:var(--bg); border-radius:var(--radius-sm); border-left:4px solid var(--gold);">
+        <div style="display:flex; align-items:center; gap:0.5rem; margin-bottom:0.5rem;">
+          <i data-icon="sunHigh" data-size="22" style="color:var(--gold);"></i>
+          <strong>Dhuhr</strong>
+        </div>
+        <p style="font-size:0.9rem; color:var(--text-muted);">Midday prayer, after sun passes meridian</p>
+      </div>
+      <div style="padding:1.25rem; background:var(--bg); border-radius:var(--radius-sm); border-left:4px solid var(--gold-dark);">
+        <div style="display:flex; align-items:center; gap:0.5rem; margin-bottom:0.5rem;">
+          <i data-icon="sunset" data-size="22" style="color:var(--gold-dark);"></i>
+          <strong>Asr</strong>
+        </div>
+        <p style="font-size:0.9rem; color:var(--text-muted);">Afternoon prayer</p>
+      </div>
+      <div style="padding:1.25rem; background:var(--bg); border-radius:var(--radius-sm); border-left:4px solid #ea580c;">
+        <div style="display:flex; align-items:center; gap:0.5rem; margin-bottom:0.5rem;">
+          <i data-icon="sunset" data-size="22" style="color:#ea580c;"></i>
+          <strong>Maghrib</strong>
+        </div>
+        <p style="font-size:0.9rem; color:var(--text-muted);">Sunset prayer</p>
+      </div>
+      <div style="padding:1.25rem; background:var(--bg); border-radius:var(--radius-sm); border-left:4px solid #6366f1;">
+        <div style="display:flex; align-items:center; gap:0.5rem; margin-bottom:0.5rem;">
+          <i data-icon="moonStar" data-size="22" style="color:#6366f1;"></i>
+          <strong>Isha</strong>
+        </div>
+        <p style="font-size:0.9rem; color:var(--text-muted);">Night prayer</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="footer-bottom">
+    <p>© 2026 Noor-ul-Iman</p>
+  </div>
+</footer>
+
+<script src="../js/icons.js"></script>
+<script src="../data/azan-dua.js"></script>
+<script src="../js/app.js"></script>
+<script src="../js/azan.js"></script>
+</body>
+</html>

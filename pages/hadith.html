@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Authentic Hadith collection from Sahih Bukhari, Muslim, and other authentic sources — categorized by topic.">
+  <title>Hadith Collection — Noor-ul-Iman</title>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700;800&family=Amiri+Quran&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="manifest" href="../manifest.json">
+  <meta name="theme-color" content="#10b981">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/pages.css">
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="nav-container">
+    <a href="../index.html" class="nav-logo">
+      <div class="nav-logo-icon">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </div>
+      <span class="nav-logo-text">Noor-ul-Iman</span>
+    </a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="quran.html">Quran</a></li>
+      <li><a href="learn.html">Learn</a></li>
+      <li><a href="prayer.html">Prayer</a></li>
+      <li><a href="ramadan.html">Ramadan</a></li>
+      <li><a href="live.html">Live Makkah</a></li>
+      <li><a href="duas.html">Duas</a></li>
+      <li><a href="hadith.html" class="active">Hadith</a></li>
+      <li><a href="zakat.html">Zakat</a></li>
+    </ul>
+    <div style="display:flex; gap:0.5rem; align-items:center;">
+      <button class="theme-toggle" id="themeToggle"><i data-icon="moon"></i></button>
+      <button class="menu-toggle" id="menuToggle"><i data-icon="menu"></i></button>
+    </div>
+  </div>
+</nav>
+
+<div class="page-header">
+  <h1 style="display:flex; align-items:center; justify-content:center; gap:0.75rem;">
+    <i data-icon="scroll" data-size="36"></i>
+    <span>Hadith Collection</span>
+  </h1>
+  <p>Authentic sayings of the Prophet ﷺ — categorized by topic</p>
+</div>
+
+<div class="container">
+  <div class="dua-categories" id="hadithCategories"></div>
+  <div id="hadithList"></div>
+</div>
+
+<footer class="footer">
+  <div class="footer-bottom">
+    <p>© 2026 Noor-ul-Iman — All hadiths from authentic sources (Sahih Bukhari, Muslim, Tirmidhi, Abu Dawud)</p>
+  </div>
+</footer>
+
+<script src="../js/icons.js"></script>
+<script src="../data/hadith.js"></script>
+<script src="../data/azan-dua.js"></script>
+<script src="../js/app.js"></script>
+<script src="../js/azan.js"></script>
+<script>
+let currentHadithCat = 'iman';
+
+function renderHadithCategories() {
+  const container = document.getElementById('hadithCategories');
+  container.innerHTML = hadithCategories.map(c => `
+    <div class="category-chip ${currentHadithCat === c.key ? 'active' : ''}" onclick="filterHadith('${c.key}')">
+      <i data-icon="${c.icon}" data-size="14" style="vertical-align:-3px;"></i>
+      <span style="margin-left:0.4rem;">${c.label}</span>
+    </div>
+  `).join('');
+  if (window.injectIcons) window.injectIcons();
+}
+
+function filterHadith(key) {
+  currentHadithCat = key;
+  renderHadithCategories();
+  renderHadiths();
+}
+
+function renderHadiths() {
+  const container = document.getElementById('hadithList');
+  const hadiths = hadithCollection[currentHadithCat] || [];
+
+  container.innerHTML = hadiths.map(h => `
+    <div class="dua-card">
+      <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:1rem; flex-wrap:wrap; gap:0.5rem;">
+        <div class="dua-title" style="border:none; padding:0; margin:0;">Narrated by ${h.narrator}</div>
+        <span style="background:linear-gradient(135deg, #d1fae5, #10b981); color:white; padding:0.3rem 0.8rem; border-radius:999px; font-size:0.75rem; font-weight:800; text-transform:uppercase; letter-spacing:0.05em;">${h.grade}</span>
+      </div>
+      <div class="dua-arabic">${h.arabic}</div>
+      <div class="dua-translation">"${h.english}"</div>
+      <div class="dua-reference">— ${h.source}</div>
+    </div>
+  `).join('');
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  renderHadithCategories();
+  renderHadiths();
+});
+</script>
+</body>
+</html>
