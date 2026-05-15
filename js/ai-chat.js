@@ -1,15 +1,14 @@
-// ====== AI Islamic Assistant — Gemini API ======
+// ====== Noor AI Engine — Custom Islamic AI ======
+// Architecture: Local Noor Engine (instant, free) + Open-source Llama LLM backend
 
-const API_KEY_STORAGE = 'geminiApiKey';
+const API_KEY_STORAGE = 'noorApiKey';
 const CHAT_HISTORY_KEY = 'aiChatHistory';
 let chatHistory = [];
 
-// Default app-provided API key — used when user hasn't set their own
-// Split into pieces to slow down trivial key extraction by bots
-// IMPORTANT: This key is visible in source. Google may detect & revoke it.
-// Rotate periodically and monitor usage on Google Cloud Console.
-const _k = ['AIza', 'SyDR5W', 'yJ_RW', 'eDt2Z', '915PD', 'MkSDG', 'J2KKg', 'Hpvw'];
-const DEFAULT_API_KEY = _k.join('');
+// Built-in API key for the Llama LLM backend (Groq — open-source models)
+// Free tier: ~6000 req/day. Replace with your own key from console.groq.com
+// Keep this empty to require BYOK mode (more secure)
+const DEFAULT_API_KEY = '';
 
 const SYSTEM_PROMPT = `You are Noor AI — a custom-built Islamic AI assistant created exclusively for the Noor-ul-Iman platform. You are NOT a generic chatbot; you are a specialized Islamic knowledge companion.
 
@@ -60,12 +59,13 @@ function saveApiKey() {
     if (window.showToast) window.showToast('Please enter your API key');
     return;
   }
-  if (!key.startsWith('AIza')) {
-    if (window.showToast) window.showToast('Invalid key format. Should start with "AIza"');
+  // Accept Groq (gsk_), OpenAI (sk-), or generic format
+  if (!key.startsWith('gsk_') && !key.startsWith('sk-') && key.length < 20) {
+    if (window.showToast) window.showToast('Invalid key format. Use a Groq key (gsk_...) for free Llama access');
     return;
   }
   localStorage.setItem(API_KEY_STORAGE, key);
-  if (window.showToast) window.showToast('API key saved! Welcome.');
+  if (window.showToast) window.showToast('API key saved! Welcome to Noor AI.');
   showChatInterface();
 }
 
@@ -273,7 +273,7 @@ async function sendMessage(e) {
   addLoadingMessage();
 
   try {
-    const reply = await callGeminiAPI(text);
+    const reply = await callNoorAI(text);
     removeLoadingMessage();
     addAssistantMessage(reply);
   } catch (err) {
@@ -296,67 +296,73 @@ async function sendMessage(e) {
   }
 }
 
-async function callGeminiAPI(prompt) {
-  const apiKey = getApiKey();
-  if (!apiKey) throw new Error('No API key configured');
-
-  // Build conversation history for context
-  const contents = [];
-
-  // Add system prompt + user message as combined
-  let fullPrompt = SYSTEM_PROMPT + '\n\n';
-
-  // Include recent history (last 6 messages for context)
-  const recentHistory = chatHistory.slice(-7, -1); // exclude the just-added user message
-  for (const msg of recentHistory) {
-    fullPrompt += `${msg.role === 'user' ? 'User' : 'Assistant'}: ${msg.content}\n\n`;
+async function callNoorAI(prompt) {
+  // Step 1: Try local Noor Engine first (instant, free, no API call)
+  if (window.NoorEngine) {
+    const localResponse = window.NoorEngine.respond(prompt);
+    if (localResponse) {
+      return localResponse.text;
+    }
   }
-  fullPrompt += `User: ${prompt}\n\nAssistant:`;
 
-  contents.push({
-    role: 'user',
-    parts: [{ text: fullPrompt }]
-  });
+  // Step 2: Fall back to LLM backend (Groq — open-source Llama 3.3)
+  return await callLLMBackend(prompt);
+}
 
-  const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
+async function callLLMBackend(prompt) {
+  const apiKey = getApiKey();
+  if (!apiKey) {
+    throw new Error('AI backend not configured. Try adding your own API key in settings, or ask a question Noor AI knows locally (try greetings, common duas, prayer guides).');
+  }
+
+  // Build messages array (OpenAI-compatible format used by Groq)
+  const messages = [{ role: 'system', content: SYSTEM_PROMPT }];
+
+  // Include recent history (last 6 messages)
+  const recentHistory = chatHistory.slice(-7, -1);
+  for (const msg of recentHistory) {
+    messages.push({
+      role: msg.role === 'user' ? 'user' : 'assistant',
+      content: msg.content
+    });
+  }
+  messages.push({ role: 'user', content: prompt });
+
+  // Use Groq's free open-source Llama 3.3 70B (OpenAI-compatible endpoint)
+  const url = 'https://api.groq.com/openai/v1/chat/completions';
 
   const res = await fetch(url, {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${apiKey}`
+    },
     body: JSON.stringify({
-      contents,
-      generationConfig: {
-        temperature: 0.7,
-        topK: 40,
-        topP: 0.95,
-        maxOutputTokens: 1024
-      },
-      safetySettings: [
-        { category: 'HARM_CATEGORY_HARASSMENT', threshold: 'BLOCK_MEDIUM_AND_ABOVE' },
-        { category: 'HARM_CATEGORY_HATE_SPEECH', threshold: 'BLOCK_MEDIUM_AND_ABOVE' },
-        { category: 'HARM_CATEGORY_SEXUALLY_EXPLICIT', threshold: 'BLOCK_MEDIUM_AND_ABOVE' },
-        { category: 'HARM_CATEGORY_DANGEROUS_CONTENT', threshold: 'BLOCK_MEDIUM_AND_ABOVE' }
-      ]
+      model: 'llama-3.3-70b-versatile',
+      messages,
+      temperature: 0.7,
+      max_tokens: 1024,
+      top_p: 0.95
     })
   });
 
   if (!res.ok) {
     const err = await res.json().catch(() => ({}));
-    if (res.status === 400 || res.status === 403) throw new Error('Invalid API key. Please check your key.');
-    if (res.status === 429) throw new Error('API quota exceeded. Wait a moment and try again.');
+    if (res.status === 401 || res.status === 403) throw new Error('Invalid API key. Please check your key.');
+    if (res.status === 429) throw new Error('Rate limit reached. Wait a moment and try again.');
     throw new Error(err.error?.message || `HTTP ${res.status}`);
   }
 
   const data = await res.json();
-  const text = data.candidates?.[0]?.content?.parts?.[0]?.text;
+  const text = data.choices?.[0]?.message?.content;
   if (!text) {
-    if (data.candidates?.[0]?.finishReason === 'SAFETY') {
-      throw new Error('Response blocked by safety filter. Try rephrasing your question.');
-    }
-    throw new Error('No response received from AI');
+    throw new Error('No response received from AI backend');
   }
   return text;
 }
+
+// Backward compat alias
+const callGeminiAPI = callNoorAI;
 
 function updateCharCount() {
   const input = document.getElementById('chatInput');

@@ -35,7 +35,7 @@
     </svg>
     <span>Noor AI</span>
   </h1>
-  <p style="position:relative; font-size:1.1rem;">The world's first AI built for Muslims, by Muslims</p>
+  <p style="position:relative; font-size:1.1rem;">Hybrid intelligence: Custom Noor Engine + Open-source AI</p>
   <div class="arabic" style="font-size:1.4rem; margin-top:1rem; color:var(--gold-light); position:relative;">رَبِّ زِدْنِي عِلْمًا</div>
 </div>
 
@@ -58,27 +58,28 @@
         </div>
 
         <p style="color:var(--text-muted); line-height:1.8; margin-bottom:1.5rem;">
-          <strong>Why bring your own key?</strong> Get <strong>~1500 questions/day</strong> using your own free AI quota — bypass our shared tier limits. Takes 30 seconds to set up.
+          <strong>Why connect AI backend?</strong> For deep questions Noor Engine can't answer locally, we use open-source <strong>Llama 3.3 (Meta)</strong> via Groq. Get a <strong>free API key</strong> in 30 seconds — no credit card needed.
         </p>
 
         <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(250px, 1fr)); gap:1rem; margin-bottom:1.5rem;">
           <div style="background:var(--bg); padding:1.25rem; border-radius:var(--radius-sm); border-left:4px solid var(--primary);">
             <div style="font-weight:800; color:var(--primary); margin-bottom:0.5rem;">Step 1</div>
-            <a href="https://aistudio.google.com/app/apikey" target="_blank" rel="noopener" style="color:var(--text); text-decoration:none; font-weight:600;">→ Visit <span style="color:var(--primary);">aistudio.google.com/app/apikey</span></a>
+            <a href="https://console.groq.com/keys" target="_blank" rel="noopener" style="color:var(--text); text-decoration:none; font-weight:600;">→ Visit <span style="color:var(--primary);">console.groq.com/keys</span></a>
           </div>
           <div style="background:var(--bg); padding:1.25rem; border-radius:var(--radius-sm); border-left:4px solid var(--gold);">
             <div style="font-weight:800; color:var(--gold-dark); margin-bottom:0.5rem;">Step 2</div>
-            <p style="margin:0; font-size:0.95rem;">Sign in with Google → "Create API key" → Copy</p>
+            <p style="margin:0; font-size:0.95rem;">Sign in (no CC) → "Create API Key" → Copy</p>
           </div>
           <div style="background:var(--bg); padding:1.25rem; border-radius:var(--radius-sm); border-left:4px solid #8b5cf6;">
             <div style="font-weight:800; color:#8b5cf6; margin-bottom:0.5rem;">Step 3</div>
-            <p style="margin:0; font-size:0.95rem;">Paste below — unlimited usage!</p>
+            <p style="margin:0; font-size:0.95rem;">Paste below → ~6000 free queries/day!</p>
           </div>
         </div>
 
         <div class="form-group">
-          <label>Your AI API Key</label>
-          <input type="password" id="apiKeyInput" placeholder="AIza..." style="font-family:monospace;">
+          <label>Your AI Backend API Key</label>
+          <input type="password" id="apiKeyInput" placeholder="gsk_..." style="font-family:monospace;">
+          <small style="display:block; margin-top:0.5rem; color:var(--text-muted);">Groq key starts with <code>gsk_</code> • OpenAI: <code>sk-</code> • Compatible with most LLM APIs</small>
         </div>
         <div style="display:flex; gap:0.5rem; flex-wrap:wrap;">
           <button class="btn" onclick="saveApiKey()" style="flex:1; min-width:200px; justify-content:center;">
@@ -282,11 +283,16 @@
 
 <script src="../js/icons.js"></script>
 <script src="../data/azan-dua.js"></script>
+<script src="../data/duas.js"></script>
+<script src="../data/hadith.js"></script>
+<script src="../data/names.js"></script>
+<script src="../data/noor-knowledge.js"></script>
 <script src="../js/app.js"></script>
 <script src="../js/azan.js"></script>
 <script src="../js/layout.js"></script>
 <script src="../js/ai-limits.js"></script>
 <script src="../js/ai-topics.js"></script>
+<script src="../js/noor-engine.js"></script>
 <script src="../js/ai-chat.js"></script>
 <script>
   // Initialize usage badge on load

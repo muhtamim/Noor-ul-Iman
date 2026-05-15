@@ -14,7 +14,7 @@ const TIERS = {
 
 // Auto-upgrade to BYOK tier if user has set their own API key
 function autoDetectTier() {
-  const userKey = localStorage.getItem('geminiApiKey');
+  const userKey = localStorage.getItem('noorApiKey') || localStorage.getItem('geminiApiKey');
   if (userKey && !localStorage.getItem('aiTier')) {
     localStorage.setItem('aiTier', 'byok');
   }
