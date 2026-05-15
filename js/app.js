@@ -188,12 +188,16 @@ function formatTime(time24) {
 }
 
 // ====== Live Clock ======
-function startClock(elementId) {
+function startClock(elementId, dateElementId) {
   const el = document.getElementById(elementId);
   if (!el) return;
+  const dateEl = dateElementId ? document.getElementById(dateElementId) : null;
   const update = () => {
     const n = new Date();
     el.textContent = n.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: true });
+    if (dateEl) {
+      dateEl.textContent = n.toLocaleDateString('en-US', { weekday: 'long', month: 'short', day: 'numeric' });
+    }
   };
   update();
   setInterval(update, 1000);
@@ -361,7 +365,7 @@ function selectMood(key, el) {
 document.addEventListener('DOMContentLoaded', () => {
   loadHijriDate('hijriDate');
   loadPrayerTimes('prayerTimes', 'prayerLocation', 'nextPrayer');
-  startClock('liveClock');
+  startClock('liveClock', 'liveDate');
   loadDailyContent();
   initStreakTracker();
   initMoodSelector();

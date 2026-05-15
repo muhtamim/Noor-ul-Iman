@@ -94,16 +94,17 @@
     </div>
 
     <div class="bento-4" style="display:flex; flex-direction:column; gap:1.25rem;">
-      <div class="hijri-display" id="hijriDate" style="flex:1;">
+      <div class="hijri-display" id="hijriDate" style="flex:0 0 auto;">
         <div class="spinner"></div>
       </div>
-      <div class="bento-card featured-emerald" style="flex:0;">
-        <div style="position:relative; z-index:1;">
-          <div style="display:flex; align-items:center; gap:0.5rem; font-size:0.8rem; opacity:0.9; text-transform:uppercase; letter-spacing:0.1em; font-weight:700; margin-bottom:0.5rem;">
+      <div class="bento-card featured-emerald" style="flex:1; display:flex; flex-direction:column; justify-content:center; min-height:180px;">
+        <div style="position:relative; z-index:1; text-align:center;">
+          <div style="display:flex; align-items:center; justify-content:center; gap:0.5rem; font-size:0.78rem; opacity:0.95; text-transform:uppercase; letter-spacing:0.15em; font-weight:700; margin-bottom:0.75rem;">
             <i data-icon="clock" data-size="14"></i>
             <span>Current Time</span>
           </div>
-          <div class="live-clock-display" id="liveClock" style="color:white; -webkit-text-fill-color:white;">--:--</div>
+          <div id="liveClock" style="color:white !important; -webkit-text-fill-color:white !important; background:none !important; font-size:3rem; font-weight:800; letter-spacing:-0.03em; line-height:1; font-variant-numeric:tabular-nums; text-shadow:0 2px 10px rgba(0,0,0,0.15);">--:--</div>
+          <div id="liveDate" style="color:rgba(255,255,255,0.85); font-size:0.85rem; font-weight:600; margin-top:0.6rem;"></div>
         </div>
       </div>
     </div>
@@ -325,6 +326,14 @@
       <div class="bento-icon" style="background:rgba(255,255,255,0.15);"><i data-icon="sparkle" data-size="26"></i></div>
       <div class="bento-title">Learn Quran</div>
       <div class="bento-desc" style="color:rgba(255,255,255,0.85);">Alphabet, Tajweed, memorize surahs — from zero to fluent.</div>
+    </a>
+
+    <a href="pages/ai.html" class="bento-card hover-glow bento-3" style="background:linear-gradient(135deg, #8b5cf6 0%, #ec4899 100%); color:white; border:none; position:relative;">
+      <div style="position:absolute; top:1rem; left:1rem; background:var(--gold); color:white; padding:0.2rem 0.6rem; border-radius:999px; font-size:0.65rem; font-weight:800; letter-spacing:0.1em;">✨ NEW • AI</div>
+      <div class="bento-arrow" style="background:rgba(255,255,255,0.2);"><i data-icon="arrowRight" data-size="16"></i></div>
+      <div class="bento-icon" style="background:rgba(255,255,255,0.15); margin-top:1.5rem;"><i data-icon="sparkle" data-size="26"></i></div>
+      <div class="bento-title">AI Islamic Assistant</div>
+      <div class="bento-desc" style="color:rgba(255,255,255,0.85);">Ask anything about Islam. Powered by AI. Free with your API key.</div>
     </a>
 
     <a href="pages/ramadan.html" class="bento-card hover-glow bento-3">

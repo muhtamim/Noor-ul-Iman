@@ -4,12 +4,13 @@
 const navItems = [
   // Main features (always visible)
   { href: 'quran.html', label: 'Quran', icon: 'book', primary: true },
+  { href: 'ai.html', label: 'AI Assistant', icon: 'sparkle', primary: true, badge: 'NEW' },
   { href: 'learn.html', label: 'Learn', icon: 'sparkle', primary: true },
   { href: 'prayer.html', label: 'Prayer', icon: 'mosque', primary: true },
   { href: 'ramadan.html', label: 'Ramadan', icon: 'moonStar', primary: true },
   { href: 'live.html', label: 'Live Makkah', icon: 'mosque', primary: true },
-  { href: 'duas.html', label: 'Duas', icon: 'hands', primary: true },
   // Secondary features (in "More" dropdown)
+  { href: 'duas.html', label: 'Daily Duas', icon: 'hands', primary: false },
   { href: 'qibla.html', label: 'Qibla', icon: 'compass', primary: false },
   { href: 'hadith.html', label: 'Hadith', icon: 'scroll', primary: false },
   { href: 'tasbih.html', label: 'Tasbih', icon: 'beads', primary: false },
@@ -33,7 +34,8 @@ function buildNavbar(activePage) {
 
   const primaryHtml = primaryItems.map(item => {
     const active = activePage === item.href ? ' class="active"' : '';
-    return `<li><a href="${prefix}${item.href}"${active}>${item.label}</a></li>`;
+    const badge = item.badge ? ` <span style="background:var(--gold); color:white; padding:0.1rem 0.4rem; border-radius:999px; font-size:0.6rem; font-weight:800; margin-left:0.2rem;">${item.badge}</span>` : '';
+    return `<li><a href="${prefix}${item.href}"${active}>${item.label}${badge}</a></li>`;
   }).join('');
 
   const moreFeaturesHtml = secondaryFeatures.map(item => {
