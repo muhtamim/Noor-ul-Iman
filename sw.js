@@ -1,25 +1,41 @@
 // ====== Service Worker for Noor-ul-Iman ======
 // Provides offline support and caching
 
-const CACHE_VERSION = 'noor-v1';
+const CACHE_VERSION = 'noor-v2';
 const STATIC_CACHE = `${CACHE_VERSION}-static`;
 const DYNAMIC_CACHE = `${CACHE_VERSION}-dynamic`;
 
 const STATIC_ASSETS = [
   '/',
   '/index.html',
+  '/manifest.json',
+  // CSS
   '/css/style.css',
   '/css/pages.css',
+  // Core JS
   '/js/app.js',
   '/js/icons.js',
+  '/js/layout.js',
   '/js/azan.js',
+  '/js/quran.js',
+  '/js/ramadan.js',
+  '/js/tasbih.js',
+  '/js/qibla.js',
+  '/js/duas.js',
+  '/js/names.js',
+  '/js/zakat.js',
+  // Data files
   '/data/daily.js',
   '/data/duas.js',
   '/data/names.js',
   '/data/hadith.js',
   '/data/azan-dua.js',
-  '/manifest.json',
+  '/data/translations.js',
+  '/data/learn.js',
+  '/data/monetization.js',
+  // Feature pages
   '/pages/quran.html',
+  '/pages/learn.html',
   '/pages/prayer.html',
   '/pages/qibla.html',
   '/pages/tasbih.html',
@@ -28,7 +44,12 @@ const STATIC_ASSETS = [
   '/pages/zakat.html',
   '/pages/ramadan.html',
   '/pages/live.html',
-  '/pages/hadith.html'
+  '/pages/hadith.html',
+  // Info pages
+  '/pages/support.html',
+  '/pages/about.html',
+  '/pages/contact.html',
+  '/pages/privacy.html'
 ];
 
 // Install: cache static assets

@@ -1,14 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>/</loc><priority>1.0</priority><changefreq>daily</changefreq></url>
-  <url><loc>/pages/quran.html</loc><priority>0.9</priority><changefreq>weekly</changefreq></url>
+  <url><loc>/pages/quran.html</loc><priority>1.0</priority><changefreq>weekly</changefreq></url>
+  <url><loc>/pages/learn.html</loc><priority>0.9</priority><changefreq>monthly</changefreq></url>
   <url><loc>/pages/prayer.html</loc><priority>0.9</priority><changefreq>daily</changefreq></url>
   <url><loc>/pages/ramadan.html</loc><priority>0.9</priority><changefreq>daily</changefreq></url>
   <url><loc>/pages/live.html</loc><priority>0.8</priority><changefreq>daily</changefreq></url>
-  <url><loc>/pages/qibla.html</loc><priority>0.8</priority><changefreq>monthly</changefreq></url>
-  <url><loc>/pages/tasbih.html</loc><priority>0.7</priority><changefreq>monthly</changefreq></url>
+  <url><loc>/pages/qibla.html</loc><priority>0.7</priority><changefreq>monthly</changefreq></url>
   <url><loc>/pages/duas.html</loc><priority>0.8</priority><changefreq>weekly</changefreq></url>
-  <url><loc>/pages/names.html</loc><priority>0.7</priority><changefreq>monthly</changefreq></url>
   <url><loc>/pages/hadith.html</loc><priority>0.8</priority><changefreq>weekly</changefreq></url>
-  <url><loc>/pages/zakat.html</loc><priority>0.7</priority><changefreq>monthly</changefreq></url>
+  <url><loc>/pages/tasbih.html</loc><priority>0.6</priority><changefreq>monthly</changefreq></url>
+  <url><loc>/pages/names.html</loc><priority>0.7</priority><changefreq>monthly</changefreq></url>
+  <url><loc>/pages/zakat.html</loc><priority>0.6</priority><changefreq>monthly</changefreq></url>
+  <url><loc>/pages/support.html</loc><priority>0.7</priority><changefreq>monthly</changefreq></url>
+  <url><loc>/pages/about.html</loc><priority>0.6</priority><changefreq>monthly</changefreq></url>
+  <url><loc>/pages/contact.html</loc><priority>0.6</priority><changefreq>monthly</changefreq></url>
+  <url><loc>/pages/privacy.html</loc><priority>0.4</priority><changefreq>yearly</changefreq></url>
 </urlset>
