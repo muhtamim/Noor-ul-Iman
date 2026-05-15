@@ -107,19 +107,23 @@
           </div>
         </div>
 
+        <!-- Welcome Hero (shown when no messages) -->
+        <div id="chatWelcome" class="chat-welcome">
+          <div class="welcome-content">
+            <div class="welcome-icon">
+              <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18M4.5 7.5l15 9M4.5 16.5l15-9M3 12h18"/></svg>
+            </div>
+            <div class="welcome-arabic">السَّلَامُ عَلَيْكُمْ</div>
+            <h2 class="welcome-title">How can I help you today?</h2>
+            <p class="welcome-subtitle">Ask anything about Islam — Quran, Hadith, prayer, duas, history. Browse topics below or type your question.</p>
+          </div>
+        </div>
+
         <!-- Chat messages -->
         <div id="chatMessages" class="ai-messages"></div>
 
-        <!-- Topic Browser (shown initially) -->
+        <!-- Topic Browser (shown when chat is empty) -->
         <div id="suggestedPrompts" class="topic-browser">
-          <div class="topic-browser-header">
-            <div style="font-size:0.8rem; font-weight:700; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.1em;">💡 Browse Topics</div>
-            <div style="display:flex; gap:0.4rem; align-items:center; font-size:0.78rem; color:var(--text-muted);">
-              <i data-icon="sparkle" data-size="12" style="color:var(--primary);"></i>
-              <span>Tap to ask</span>
-            </div>
-          </div>
-
           <!-- Topic Categories -->
           <div class="topic-categories" id="topicCategories">
             <button class="topic-category active" data-cat="popular" onclick="filterTopics('popular')">⭐ Popular</button>

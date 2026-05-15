@@ -55,9 +55,7 @@ function showChatInterface() {
   document.getElementById('chatInterface').style.display = 'block';
   loadChatHistory();
   renderMessages();
-  if (chatHistory.length === 0) {
-    addAssistantMessage("Assalamu Alaikum! I'm your Islamic Assistant powered by AI. Feel free to ask me anything about Islam, the Quran, Hadith, prayers, or duas. How can I help you today?");
-  }
+  // No automatic welcome message — keep it clean. Topics shown by default.
   document.getElementById('chatInput')?.focus();
 }
 
@@ -81,23 +79,33 @@ function clearChat() {
   chatHistory = [];
   localStorage.removeItem(CHAT_HISTORY_KEY);
   renderMessages();
-  addAssistantMessage("Chat cleared. Assalamu Alaikum! How can I help you?");
+  // Show topics again after clearing
+  const topics = document.getElementById('suggestedPrompts');
+  if (topics) topics.style.display = 'block';
+  if (window.showToast) window.showToast('Chat cleared — start fresh!');
 }
 
 function renderMessages() {
   const container = document.getElementById('chatMessages');
+  const welcomeHero = document.getElementById('chatWelcome');
+  const suggested = document.getElementById('suggestedPrompts');
   if (!container) return;
+
   if (chatHistory.length === 0) {
     container.innerHTML = '';
+    // Show welcome + topics
+    if (welcomeHero) welcomeHero.style.display = 'block';
+    if (suggested) suggested.style.display = 'block';
     return;
   }
+
+  // Has messages — hide welcome, hide topics
+  if (welcomeHero) welcomeHero.style.display = 'none';
+  if (suggested) suggested.style.display = 'none';
+
   container.innerHTML = chatHistory.map(msg => renderMessage(msg)).join('');
-  // Scroll to bottom
   container.scrollTop = container.scrollHeight;
   if (window.injectIcons) window.injectIcons();
-  // Hide suggested prompts if there's any message
-  const suggested = document.getElementById('suggestedPrompts');
-  if (suggested) suggested.style.display = chatHistory.length > 1 ? 'none' : 'block';
 }
 
 function renderMessage(msg) {
