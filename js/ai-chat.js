@@ -278,17 +278,21 @@ async function sendMessage(e) {
     addAssistantMessage(reply);
   } catch (err) {
     removeLoadingMessage();
-    let errMsg = '⚠️ Sorry, something went wrong. ';
-    if (err.message.includes('API key')) {
-      errMsg += 'Your API key may be invalid. Please check it.';
-    } else if (err.message.includes('quota')) {
-      errMsg += 'API quota exceeded for today. Try again tomorrow.';
-    } else if (err.message.includes('blocked')) {
-      errMsg += 'Response was blocked by safety filters. Try rephrasing.';
+    // Use Noor Engine's friendly fallback instead of harsh error
+    const fallback = window.NoorEngine?.fallbackResponse(text);
+    if (fallback) {
+      addAssistantMessage(fallback);
     } else {
-      errMsg += err.message;
+      let errMsg = '⚠️ Sorry, I had trouble understanding that. ';
+      if (err.message.includes('API key')) {
+        errMsg += 'Optional: Add a free Groq API key in ⚙️ Settings for unlimited AI access.';
+      } else if (err.message.includes('quota') || err.message.includes('rate')) {
+        errMsg += 'Rate limit reached. Try again in a moment.';
+      } else {
+        errMsg += 'Try asking about Quran, prayers, duas, or Islamic topics.';
+      }
+      addAssistantMessage(errMsg);
     }
-    addAssistantMessage(errMsg);
   } finally {
     sendBtn.disabled = false;
     sendBtn.innerHTML = '<i data-icon="lightning" data-size="16"></i><span>Send</span>';
@@ -305,8 +309,29 @@ async function callNoorAI(prompt) {
     }
   }
 
-  // Step 2: Fall back to LLM backend (Groq — open-source Llama 3.3)
-  return await callLLMBackend(prompt);
+  // Step 2: Try LLM backend if API key is configured
+  const hasApiKey = !!getApiKey();
+  if (hasApiKey) {
+    try {
+      return await callLLMBackend(prompt);
+    } catch (e) {
+      // If LLM fails (invalid key, rate limit), fall back to Noor Engine's friendly response
+      console.warn('LLM backend failed, using Noor fallback:', e.message);
+      const fallback = window.NoorEngine?.fallbackResponse(prompt);
+      if (fallback) {
+        return fallback + `\n\n---\n*Note: AI backend error — ${e.message}. Check your API key in ⚙️ Settings.*`;
+      }
+      throw e;
+    }
+  }
+
+  // Step 3: No API key + no local match — return helpful fallback (not error)
+  if (window.NoorEngine?.fallbackResponse) {
+    return window.NoorEngine.fallbackResponse(prompt);
+  }
+
+  // Last resort
+  return "I'm not sure how to answer that. Please try asking about Quran, prayers, duas, or Islamic topics.";
 }
 
 async function callLLMBackend(prompt) {

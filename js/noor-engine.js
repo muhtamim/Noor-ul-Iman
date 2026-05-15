@@ -35,6 +35,49 @@ const NoorEngine = {
   },
 
   /**
+   * Fallback message when no LLM is available and no local match
+   * Returns helpful suggestions instead of an error
+   */
+  fallbackResponse(userMessage) {
+    const isShortOrGibberish = userMessage.length < 4 || /^[^a-zA-Z]+$/.test(userMessage);
+
+    if (isShortOrGibberish) {
+      return `I didn't quite catch that. 😊\n\nCould you ask me something more specific about Islam? For example:\n\n- **"What are the 5 pillars of Islam?"**\n- **"How to perform Salah?"**\n- **"Find a dua for anxiety"**\n- **"Tell me about Ayat al-Kursi"**\n- **"What is Ramadan?"**\n\nOr browse the topic categories above to explore!`;
+    }
+
+    // Suggest similar topics based on partial matches
+    const suggestions = this.findRelatedTopics(userMessage);
+
+    return `I'm not yet sure how to answer that. My current knowledge focuses on:\n\n📖 **Quran** — verses, surahs, translations\n🕌 **Prayer** — Salah, Wudu, prayer times\n🤲 **Duas** — from Quran and authentic Sunnah\n📜 **Hadith** — from Bukhari, Muslim, Tirmidhi\n✨ **99 Names of Allah** (Asma-ul-Husna)\n🌙 **Ramadan, fasting, Eid**\n👤 **5 Pillars, 6 Articles of Faith**\n\n${suggestions ? '**Related to your question:**\n' + suggestions + '\n\n' : ''}**Tip**: For deeper questions, connect a free Groq API key in ⚙️ Settings → unlocks advanced Llama 3.3 AI.\n\nWhat would you like to know about Islam?`;
+  },
+
+  /**
+   * Find topics that may be related to the query
+   */
+  findRelatedTopics(text) {
+    const lower = text.toLowerCase();
+    const suggestions = [];
+
+    if (lower.includes('quran') || lower.includes('surah') || lower.includes('verse') || lower.includes('ayat')) {
+      suggestions.push('- Try: *"What is the Quran?"* or *"Explain Surah Al-Fatihah"*');
+    }
+    if (lower.includes('dua') || lower.includes('prayer') || lower.includes('supplication')) {
+      suggestions.push('- Try: *"Dua for travel"* or *"Dua for anxiety"*');
+    }
+    if (lower.includes('hadith') || lower.includes('hadis') || lower.includes('saying')) {
+      suggestions.push('- Try: *"Hadiths about kindness"* or *"Hadiths on prayer"*');
+    }
+    if (lower.includes('allah') || lower.includes('god') || lower.includes('names')) {
+      suggestions.push('- Try: *"99 Names of Allah"* or specific names like *"Ar-Rahman"*');
+    }
+    if (lower.includes('prophet') || lower.includes('muhammad') || lower.includes('story')) {
+      suggestions.push('- Try: *"Tell me about Prophet Muhammad"* or *"Story of Prophet Yunus"*');
+    }
+
+    return suggestions.length ? suggestions.join('\n') : '';
+  },
+
+  /**
    * Search pre-built knowledge base
    */
   searchKnowledge(text) {
