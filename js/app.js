@@ -1,10 +1,12 @@
 // ====== Noor-ul-Iman v2 - Main App JS ======
 
-// Register service worker for PWA
+// Register service worker for PWA — always use root path so scope = /
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
-    const swPath = window.location.pathname.includes('/pages/') ? '../sw.js' : 'sw.js';
-    navigator.serviceWorker.register(swPath).catch(err => console.log('SW registration failed:', err));
+    const isPagesDir = window.location.pathname.includes('/pages/');
+    const swPath = isPagesDir ? '../sw.js' : 'sw.js';
+    const scope = isPagesDir ? '../' : '/';
+    navigator.serviceWorker.register(swPath, { scope }).catch(err => console.log('SW registration failed:', err));
   });
 }
 

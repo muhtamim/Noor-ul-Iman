@@ -31,6 +31,10 @@
       <li><a href="qibla.html">Qibla</a></li>
       <li><a href="duas.html">Duas</a></li>
       <li><a href="hadith.html">Hadith</a></li>
+      <li><a href="tasbih.html">Tasbih</a></li>
+      <li><a href="names.html">99 Names</a></li>
+      <li><a href="zakat.html">Zakat</a></li>
+      <li><a href="support.html" style="background:var(--gold); color:white; border-radius:8px;">❤ Support</a></li>
     </ul>
     <div style="display:flex; gap:0.5rem; align-items:center;">
       <button class="theme-toggle" id="themeToggle"><i data-icon="moon"></i></button>
@@ -78,13 +82,13 @@
 
     <div class="stream-wrapper" id="streamWrapper">
       <iframe id="streamFrame"
-        src="https://www.youtube.com/embed/nw16SGf8nDk?autoplay=1&mute=1"
+        src="https://www.youtube-nocookie.com/embed/nw16SGf8nDk?rel=0&modestbranding=1&playsinline=1"
         title="Live Makkah Stream"
         frameborder="0"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen"
         allowfullscreen
-        referrerpolicy="no-referrer-when-downgrade">
-      </iframe>
+        referrerpolicy="strict-origin-when-cross-origin"
+        loading="eager"></iframe>
     </div>
 
     <div style="margin-top:1rem; display:flex; gap:0.5rem; align-items:flex-start; padding:1rem 1.25rem; background:linear-gradient(135deg, rgba(245, 158, 11, 0.1), rgba(245, 158, 11, 0.05)); border-left:4px solid var(--gold); border-radius:var(--radius-sm); font-size:0.88rem;">
@@ -121,13 +125,20 @@
       </div>
       <div style="min-width:0;">
         <div style="font-weight:700; color:white; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;" id="nowPlayingTitle">Now Playing</div>
-        <div style="font-size:0.85rem; color:var(--gold-light);">Live Quran Audio</div>
+        <div style="font-size:0.85rem; color:var(--gold-light);">Auto-plays full Quran</div>
       </div>
     </div>
-    <button class="btn btn-outline btn-small" onclick="stopAudioStream()" style="color:white; border-color:rgba(255,255,255,0.3);">
-      <i data-icon="check" data-size="14"></i>
-      <span>Stop</span>
-    </button>
+    <div style="display:flex; gap:0.4rem; align-items:center;">
+      <button class="btn btn-outline btn-small" onclick="prevSurah()" title="Previous Surah" style="color:white; border-color:rgba(255,255,255,0.3); padding:0.4rem 0.7rem;">
+        <i data-icon="arrowRight" data-size="14" style="transform:rotate(180deg);"></i>
+      </button>
+      <button class="btn btn-outline btn-small" onclick="nextSurah()" title="Next Surah" style="color:white; border-color:rgba(255,255,255,0.3); padding:0.4rem 0.7rem;">
+        <i data-icon="arrowRight" data-size="14"></i>
+      </button>
+      <button class="btn btn-outline btn-small" onclick="stopAudioStream()" style="color:white; border-color:rgba(255,255,255,0.3);">
+        <span>Stop</span>
+      </button>
+    </div>
   </div>
 
   <!-- Quote -->
@@ -164,60 +175,62 @@
 // Direct video IDs are confirmed working at time of writing
 const videoStreams = [
   { id: 'makkah-main', name: 'Makkah Live (Verified)', desc: 'Masjid al-Haram — Confirmed working stream',
-    embed: 'https://www.youtube.com/embed/nw16SGf8nDk?autoplay=1&mute=1',
+    embed: 'https://www.youtube-nocookie.com/embed/nw16SGf8nDk?rel=0&modestbranding=1&playsinline=1',
     yturl: 'https://www.youtube.com/watch?v=nw16SGf8nDk',
     label: 'Masjid al-Haram • Makkah Live' },
   { id: 'madinah-main', name: 'Madinah Live (Verified)', desc: 'Masjid an-Nabawi — Confirmed working stream',
-    embed: 'https://www.youtube.com/embed/3L7Gf0BD0gc?autoplay=1&mute=1',
+    embed: 'https://www.youtube-nocookie.com/embed/3L7Gf0BD0gc?rel=0&modestbranding=1&playsinline=1',
     yturl: 'https://www.youtube.com/watch?v=3L7Gf0BD0gc',
     label: 'Masjid an-Nabawi • Madinah Live' },
   { id: 'makkah-search', name: 'Makkah Live (Auto-Search)', desc: 'Auto-find currently live Makkah stream',
-    embed: 'https://www.youtube.com/embed/?listType=search&list=makkah+live+24+7&autoplay=1&mute=1',
+    embed: 'https://www.youtube.com/embed?listType=search&list=makkah+live+24+7',
     yturl: 'https://www.youtube.com/results?search_query=makkah+live+24+7&sp=EgJAAQ%253D%253D',
     label: 'Makkah Live • Auto-search' },
-  { id: 'madinah-search', name: 'Madinah Live (YouTube Search)', desc: 'Auto-find currently live Madinah stream',
-    embed: 'https://www.youtube.com/embed/?listType=search&list=madinah+live+24+7&autoplay=1&mute=1',
+  { id: 'madinah-search', name: 'Madinah Live (Auto-Search)', desc: 'Auto-find currently live Madinah stream',
+    embed: 'https://www.youtube.com/embed?listType=search&list=madinah+live+24+7',
     yturl: 'https://www.youtube.com/results?search_query=madinah+live+24+7&sp=EgJAAQ%253D%253D',
     label: 'Madinah Live • Auto-search' },
   { id: 'makkah-ch1', name: 'Saudi Quran TV', desc: 'Official Saudi Quran Channel',
-    embed: 'https://www.youtube.com/embed/live_stream?channel=UCO5JE7ZS9MIxLhcrNQpfwsg&autoplay=1&mute=1',
+    embed: 'https://www.youtube-nocookie.com/embed/live_stream?channel=UCO5JE7ZS9MIxLhcrNQpfwsg',
     yturl: 'https://www.youtube.com/channel/UCO5JE7ZS9MIxLhcrNQpfwsg/live',
     label: 'Saudi Quran TV' },
   { id: 'makkah-ch2', name: 'Quran TV', desc: 'Quran Channel — Live recitation',
-    embed: 'https://www.youtube.com/embed/live_stream?channel=UCmUmywBPM-pXrXKjPlYAOFw&autoplay=1&mute=1',
+    embed: 'https://www.youtube-nocookie.com/embed/live_stream?channel=UCmUmywBPM-pXrXKjPlYAOFw',
     yturl: 'https://www.youtube.com/channel/UCmUmywBPM-pXrXKjPlYAOFw/live',
     label: 'Quran TV Channel' },
   { id: 'madinah-ch1', name: 'Sunnah TV', desc: 'Saudi Sunnah Channel — Masjid an-Nabawi',
-    embed: 'https://www.youtube.com/embed/live_stream?channel=UCwjeAOlSrLDqxkFh-V1uoNw&autoplay=1&mute=1',
+    embed: 'https://www.youtube-nocookie.com/embed/live_stream?channel=UCwjeAOlSrLDqxkFh-V1uoNw',
     yturl: 'https://www.youtube.com/channel/UCwjeAOlSrLDqxkFh-V1uoNw/live',
     label: 'Saudi Sunnah TV • Madinah' },
   { id: 'madinah-ch2', name: 'Madinah Live HD', desc: 'Madinah Channel',
-    embed: 'https://www.youtube.com/embed/live_stream?channel=UCN5DXyKEC1OOA9_NfRyiUug&autoplay=1&mute=1',
+    embed: 'https://www.youtube-nocookie.com/embed/live_stream?channel=UCN5DXyKEC1OOA9_NfRyiUug',
     yturl: 'https://www.youtube.com/channel/UCN5DXyKEC1OOA9_NfRyiUug/live',
     label: 'Madinah Channel' }
 ];
 
-// ====== Audio Streams (Confirmed Working URLs) ======
+// ====== Audio Player — Verified Working Reciters ======
+// Uses mp3quran.net direct mp3 files (tested 2026) — auto-advances through all 114 surahs
 const audioStations = [
-  { name: 'Quran Kareem Radio', desc: 'Saudi Arabia • 128kbps',
-    url: 'https://Qurankareem.live-streams.nl/stream' },
-  { name: 'Sheikh Mishary Alafasy', desc: 'Famous Kuwaiti Qari • 24/7',
-    url: 'https://backup.qurango.net/radio/mishary_alafasi' },
-  { name: 'Sheikh Abdul Basit', desc: 'Legendary Egyptian Qari',
-    url: 'https://backup.qurango.net/radio/abdulbasit_mojawwad' },
-  { name: 'Sheikh Maher Al-Mueaqly', desc: 'Imam of Masjid al-Haram',
-    url: 'https://backup.qurango.net/radio/maher_al_mueaqly' },
-  { name: 'Sheikh Saud Al-Shuraim', desc: 'Imam of Masjid al-Haram',
-    url: 'https://backup.qurango.net/radio/saud_alshuraim' },
-  { name: 'Sheikh Ahmad Al-Ajamy', desc: 'Beautiful melodious recitation',
-    url: 'https://backup.qurango.net/radio/ahmad_alajamy' },
-  { name: 'Sheikh Saad Al-Ghamdi', desc: 'Clear & precise tajweed',
-    url: 'https://backup.qurango.net/radio/saad_alghamdi' },
-  { name: 'Sheikh Abdullah Basfar', desc: 'Renowned Saudi reciter',
-    url: 'https://backup.qurango.net/radio/abdullah_basfar' },
-  { name: 'Sheikh Hudhaify', desc: 'Imam of Masjid an-Nabawi',
-    url: 'https://backup.qurango.net/radio/ali_alhudhaifi' }
+  { name: 'Sheikh Mishary Alafasy', desc: 'Famous Kuwaiti Qari • Plays all 114 surahs',
+    server: 'server8', path: 'afs', id: 'afs' },
+  { name: 'Sheikh Abdul Basit', desc: 'Legendary Egyptian Qari • Murattal',
+    server: 'server7', path: 'basit', id: 'basit' },
+  { name: 'Sheikh Abdurrahman Sudais', desc: 'Imam of Masjid al-Haram',
+    server: 'server11', path: 'sds', id: 'sds' },
+  { name: 'Sheikh Mohamed Al-Minshawi', desc: 'Beautiful melodious recitation',
+    server: 'server10', path: 'minsh', id: 'minsh' },
+  { name: 'Sheikh Khalifa Al-Tunaiji', desc: 'Calm & soothing voice',
+    server: 'server6', path: 'akdr', id: 'akdr' }
 ];
+
+// State for sequential surah playback
+let currentSurahIdx = 1;
+let currentReciterId = null;
+
+function getSurahUrl(station, surahNum) {
+  const padded = String(surahNum).padStart(3, '0');
+  return `https://${station.server}.mp3quran.net/${station.path}/${padded}.mp3`;
+}
 
 function renderStreams() {
   const grid = document.getElementById('streamGrid');
@@ -248,7 +261,7 @@ function renderAudioStations() {
   const grid = document.getElementById('audioGrid');
   if (!grid) return;
   grid.innerHTML = audioStations.map((s, i) => `
-    <div class="bento-card bento-4 audio-station" data-stream="${s.url}" data-name="${s.name}">
+    <div class="bento-card bento-4 audio-station" data-reciter-id="${s.id}" data-server="${s.server}" data-path="${s.path}" data-name="${s.name}">
       <div style="display:flex; align-items:center; justify-content:space-between; gap:1rem;">
         <div style="flex:1; min-width:0;">
           <div class="bento-title">${s.name}</div>
@@ -300,8 +313,19 @@ let loadingTimeout = null;
 
 function playAudioStream(btn) {
   const station = btn.closest('.audio-station');
-  const streamUrl = station.dataset.stream;
+  const recId = station.dataset.reciterId;
   const name = station.dataset.name;
+  const stationObj = audioStations.find(s => s.id === recId);
+  if (!stationObj) return;
+
+  // If same reciter already playing → pause
+  if (currentAudio && currentReciterId === recId && !currentAudio.paused) {
+    currentAudio.pause();
+    document.querySelectorAll('.audio-station').forEach(s => s.classList.remove('playing', 'loading'));
+    const footer = document.getElementById('audioPlayerFooter');
+    if (footer) footer.style.display = 'none';
+    return;
+  }
 
   if (currentAudio) {
     currentAudio.pause();
@@ -309,48 +333,62 @@ function playAudioStream(btn) {
   }
   if (loadingTimeout) clearTimeout(loadingTimeout);
 
+  currentReciterId = recId;
+  currentSurahIdx = parseInt(localStorage.getItem(`lastSurah_${recId}`) || '1');
+  playSurahByReciter(stationObj, name, station);
+}
+
+function playSurahByReciter(stationObj, name, station) {
   document.querySelectorAll('.audio-station').forEach(s => s.classList.remove('playing', 'loading'));
-  station.classList.add('loading');
+  if (station) station.classList.add('loading');
 
-  if (window.showToast) window.showToast('Connecting to stream...');
+  if (window.showToast) window.showToast(`Loading Surah ${currentSurahIdx}...`);
 
-  currentAudio = new Audio();
-  currentAudio.crossOrigin = "anonymous";
-  currentAudio.volume = 0.8;
-  currentAudio.src = streamUrl;
+  const url = getSurahUrl(stationObj, currentSurahIdx);
+  currentAudio = new Audio(url);
+  currentAudio.volume = 0.85;
 
-  // Timeout fallback - if not loaded in 8s, show error
   loadingTimeout = setTimeout(() => {
     if (currentAudio && currentAudio.readyState < 2) {
-      if (window.showToast) window.showToast('Stream took too long. Try another station.');
-      station.classList.remove('loading');
-      stopAudioStream();
+      if (window.showToast) window.showToast('Loading timed out. Try another reciter.');
+      if (station) station.classList.remove('loading');
     }
-  }, 8000);
+  }, 10000);
 
   currentAudio.addEventListener('playing', () => {
     clearTimeout(loadingTimeout);
-    station.classList.remove('loading');
-    station.classList.add('playing');
-    if (window.showToast) window.showToast('Now playing: ' + name);
+    if (station) {
+      station.classList.remove('loading');
+      station.classList.add('playing');
+    }
     const footer = document.getElementById('audioPlayerFooter');
     const title = document.getElementById('nowPlayingTitle');
     if (footer) footer.style.display = 'flex';
-    if (title) title.textContent = name;
+    if (title) title.textContent = `${name} — Surah ${currentSurahIdx}`;
+    if (window.showToast) window.showToast(`Playing: ${name} • Surah ${currentSurahIdx}`);
+    localStorage.setItem(`lastSurah_${stationObj.id}`, currentSurahIdx);
+  });
+
+  currentAudio.addEventListener('ended', () => {
+    currentSurahIdx = (currentSurahIdx % 114) + 1;
+    playSurahByReciter(stationObj, name, station);
   });
 
   currentAudio.addEventListener('error', () => {
     clearTimeout(loadingTimeout);
-    station.classList.remove('loading');
-    if (window.showToast) window.showToast('Could not load stream. Try another.');
-    stopAudioStream();
+    if (station) station.classList.remove('loading');
+    if (window.showToast) window.showToast('Audio load failed. Trying next surah...');
+    currentSurahIdx = (currentSurahIdx % 114) + 1;
+    if (currentSurahIdx > 1) {
+      setTimeout(() => playSurahByReciter(stationObj, name, station), 500);
+    }
   });
 
   currentAudio.play().catch(e => {
     console.error('Play failed:', e);
     clearTimeout(loadingTimeout);
-    station.classList.remove('loading');
-    if (window.showToast) window.showToast('Click again to allow audio playback.');
+    if (station) station.classList.remove('loading');
+    if (window.showToast) window.showToast('Click again to start playback.');
   });
 }
 
@@ -360,9 +398,26 @@ function stopAudioStream() {
     currentAudio.src = '';
     currentAudio = null;
   }
+  currentReciterId = null;
   document.querySelectorAll('.audio-station').forEach(s => s.classList.remove('playing', 'loading'));
   const footer = document.getElementById('audioPlayerFooter');
   if (footer) footer.style.display = 'none';
+}
+
+function nextSurah() {
+  if (!currentAudio || !currentReciterId) return;
+  currentSurahIdx = (currentSurahIdx % 114) + 1;
+  const stationObj = audioStations.find(s => s.id === currentReciterId);
+  const station = document.querySelector(`[data-reciter-id="${currentReciterId}"]`);
+  playSurahByReciter(stationObj, stationObj?.name || '', station);
+}
+
+function prevSurah() {
+  if (!currentAudio || !currentReciterId) return;
+  currentSurahIdx = currentSurahIdx === 1 ? 114 : currentSurahIdx - 1;
+  const stationObj = audioStations.find(s => s.id === currentReciterId);
+  const station = document.querySelector(`[data-reciter-id="${currentReciterId}"]`);
+  playSurahByReciter(stationObj, stationObj?.name || '', station);
 }
 
 // Init
