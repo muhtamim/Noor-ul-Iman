@@ -31,30 +31,38 @@
 
 <div class="container">
 
-  <!-- API Key Setup (if no key saved) -->
+  <!-- API Key Setup (optional — only shown via "Settings" button) -->
   <div id="apiKeySetup" class="bento-grid" style="display:none;">
     <div class="bento-12">
-      <div class="bento-card" style="padding:2.5rem;">
+      <div class="bento-card" style="padding:2.5rem; position:relative;">
+        <button onclick="useDefaultKey()" style="position:absolute; top:1rem; right:1rem; background:var(--bg); border:1px solid var(--border); padding:0.4rem 0.9rem; border-radius:999px; cursor:pointer; color:var(--text-muted); font-size:0.85rem; font-weight:600;">✕ Skip</button>
+
         <div style="display:flex; align-items:center; gap:0.75rem; margin-bottom:1rem;">
-          <i data-icon="settings" data-size="28" style="color:var(--primary);"></i>
-          <h2 style="font-size:1.5rem; font-weight:800; margin:0;">One-Time Setup: Get Your Free Gemini API Key</h2>
+          <i data-icon="sparkle" data-size="28" style="color:var(--primary);"></i>
+          <h2 style="font-size:1.5rem; font-weight:800; margin:0;">Bring Your Own API Key (Optional)</h2>
         </div>
+
+        <div style="background:linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(16, 185, 129, 0.03)); border-left:4px solid var(--primary); padding:1.25rem; border-radius:8px; margin-bottom:1.5rem;">
+          <strong style="color:var(--primary);">✓ You don't need this!</strong>
+          <p style="margin:0.5rem 0 0; color:var(--text);">Our AI works out-of-the-box with the free tier (10 questions/day). Click "Skip" to use it now. Upgrade for higher limits.</p>
+        </div>
+
         <p style="color:var(--text-muted); line-height:1.8; margin-bottom:1.5rem;">
-          To use the AI Assistant, you need a free Google Gemini API key. It takes <strong>30 seconds</strong> to get and gives you <strong>~1500 free questions/day</strong>. Your key is stored only on your device.
+          <strong>Why bring your own key?</strong> Get <strong>~1500 questions/day</strong> with the free Google Gemini API quota — bypass our shared limits. Takes 30 seconds to set up.
         </p>
 
         <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(250px, 1fr)); gap:1rem; margin-bottom:1.5rem;">
           <div style="background:var(--bg); padding:1.25rem; border-radius:var(--radius-sm); border-left:4px solid var(--primary);">
             <div style="font-weight:800; color:var(--primary); margin-bottom:0.5rem;">Step 1</div>
-            <a href="https://aistudio.google.com/app/apikey" target="_blank" rel="noopener" style="color:var(--text); text-decoration:none; font-weight:600;">→ Go to <span style="color:var(--primary);">aistudio.google.com/app/apikey</span></a>
+            <a href="https://aistudio.google.com/app/apikey" target="_blank" rel="noopener" style="color:var(--text); text-decoration:none; font-weight:600;">→ Visit <span style="color:var(--primary);">aistudio.google.com/app/apikey</span></a>
           </div>
           <div style="background:var(--bg); padding:1.25rem; border-radius:var(--radius-sm); border-left:4px solid var(--gold);">
             <div style="font-weight:800; color:var(--gold-dark); margin-bottom:0.5rem;">Step 2</div>
-            <p style="margin:0; font-size:0.95rem;">Sign in with Google → Click "Create API key" → Copy it</p>
+            <p style="margin:0; font-size:0.95rem;">Sign in with Google → "Create API key" → Copy</p>
           </div>
           <div style="background:var(--bg); padding:1.25rem; border-radius:var(--radius-sm); border-left:4px solid #8b5cf6;">
             <div style="font-weight:800; color:#8b5cf6; margin-bottom:0.5rem;">Step 3</div>
-            <p style="margin:0; font-size:0.95rem;">Paste below — done! Use AI unlimited.</p>
+            <p style="margin:0; font-size:0.95rem;">Paste below — unlimited usage!</p>
           </div>
         </div>
 
@@ -62,15 +70,20 @@
           <label>Your Gemini API Key</label>
           <input type="password" id="apiKeyInput" placeholder="AIza..." style="font-family:monospace;">
         </div>
-        <button class="btn" onclick="saveApiKey()" style="width:100%; justify-content:center;">
-          <i data-icon="check" data-size="16"></i>
-          <span>Save & Start Chatting</span>
-        </button>
+        <div style="display:flex; gap:0.5rem; flex-wrap:wrap;">
+          <button class="btn" onclick="saveApiKey()" style="flex:1; min-width:200px; justify-content:center;">
+            <i data-icon="check" data-size="16"></i>
+            <span>Save My Key</span>
+          </button>
+          <button class="btn btn-outline" onclick="useDefaultKey()" style="justify-content:center;">
+            <span>Use Free Tier Instead</span>
+          </button>
+        </div>
 
         <div style="background:rgba(16, 185, 129, 0.08); padding:1rem 1.25rem; border-radius:8px; margin-top:1.5rem; font-size:0.85rem; display:flex; gap:0.6rem; align-items:flex-start;">
           <i data-icon="shield" data-size="18" style="color:var(--primary); flex-shrink:0; margin-top:2px;"></i>
           <div>
-            <strong>100% Private:</strong> Your API key never leaves your device. It's saved only in your browser's localStorage. We don't have a server — your conversations go directly to Google.
+            <strong>100% Private:</strong> Your API key never leaves your device. Stored only in your browser's localStorage. Conversations go directly to Google.
           </div>
         </div>
       </div>

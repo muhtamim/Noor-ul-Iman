@@ -6,10 +6,19 @@ const UNLOCK_CODE_STORAGE = 'aiUnlockedCodes';
 
 const TIERS = {
   free:    { name: 'Free',    dailyLimit: 10,    badge: '🌱', color: '#10b981' },
-  plus:    { name: 'Plus',    dailyLimit: 100,   badge: '✨', color: '#8b5cf6' },
-  pro:     { name: 'Pro',     dailyLimit: 9999,  badge: '🌟', color: '#f59e0b' },  // effectively unlimited
-  lifetime:{ name: 'Lifetime',dailyLimit: 9999,  badge: '👑', color: '#ec4899' }
+  plus:    { name: 'Plus',    dailyLimit: 50,    badge: '✨', color: '#8b5cf6' },   // shared key tier
+  pro:     { name: 'Pro',     dailyLimit: 200,   badge: '🌟', color: '#f59e0b' },  // shared key tier
+  lifetime:{ name: 'Lifetime',dailyLimit: 500,   badge: '👑', color: '#ec4899' },  // shared key tier
+  byok:    { name: 'BYOK',    dailyLimit: 9999,  badge: '🔑', color: '#06b6d4' }   // bring-your-own-key = unlimited
 };
+
+// Auto-upgrade to BYOK tier if user has set their own API key
+function autoDetectTier() {
+  const userKey = localStorage.getItem('geminiApiKey');
+  if (userKey && !localStorage.getItem('aiTier')) {
+    localStorage.setItem('aiTier', 'byok');
+  }
+}
 
 // SHA-256 hashed codes (codes themselves not visible)
 // To add a new code: hash it via SHA-256, then add the hash here with its tier
@@ -35,6 +44,7 @@ async function hashCode(code) {
 }
 
 function getCurrentTier() {
+  autoDetectTier(); // upgrade to BYOK if user has own key
   return localStorage.getItem(TIER_STORAGE) || 'free';
 }
 

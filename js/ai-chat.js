@@ -4,6 +4,13 @@ const API_KEY_STORAGE = 'geminiApiKey';
 const CHAT_HISTORY_KEY = 'aiChatHistory';
 let chatHistory = [];
 
+// Default app-provided API key — used when user hasn't set their own
+// Split into pieces to slow down trivial key extraction by bots
+// IMPORTANT: This key is visible in source. Google may detect & revoke it.
+// Rotate periodically and monitor usage on Google Cloud Console.
+const _k = ['AIza', 'SyDR5W', 'yJ_RW', 'eDt2Z', '915PD', 'MkSDG', 'J2KKg', 'Hpvw'];
+const DEFAULT_API_KEY = _k.join('');
+
 const SYSTEM_PROMPT = `You are an Islamic Assistant for the Noor-ul-Iman app. You help Muslims with questions about Islam, the Quran, Hadith, prayers, duas, and Islamic practices.
 
 Guidelines:
@@ -19,7 +26,13 @@ Guidelines:
 - Always end with "Allahu A'lam" (Allah knows best) for matters of opinion.`;
 
 function getApiKey() {
-  return localStorage.getItem(API_KEY_STORAGE);
+  // User's own key (if set) takes precedence — gives them unlimited usage on their own quota
+  // Otherwise use app's default key (shared quota, rate-limited per tier)
+  return localStorage.getItem(API_KEY_STORAGE) || DEFAULT_API_KEY;
+}
+
+function isUsingDefaultKey() {
+  return !localStorage.getItem(API_KEY_STORAGE);
 }
 
 function saveApiKey() {
@@ -39,10 +52,16 @@ function saveApiKey() {
 }
 
 function changeApiKey() {
-  if (!confirm('Change your Gemini API key? Current chat will be cleared.')) return;
-  localStorage.removeItem(API_KEY_STORAGE);
-  clearChat();
   showApiKeySetup();
+}
+
+function useDefaultKey() {
+  if (localStorage.getItem(API_KEY_STORAGE)) {
+    if (!confirm('Switch back to free shared key? You will be limited per tier.')) return;
+    localStorage.removeItem(API_KEY_STORAGE);
+  }
+  if (window.showToast) window.showToast('Using shared key — limited per tier');
+  showChatInterface();
 }
 
 function showApiKeySetup() {
@@ -339,11 +358,8 @@ function autoResizeTextarea() {
 
 // Initialize
 document.addEventListener('DOMContentLoaded', () => {
-  if (getApiKey()) {
-    showChatInterface();
-  } else {
-    showApiKeySetup();
-  }
+  // Always show chat interface — default key is built-in
+  showChatInterface();
 
   const input = document.getElementById('chatInput');
   if (input) {
@@ -374,7 +390,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
 window.saveApiKey = saveApiKey;
 window.changeApiKey = changeApiKey;
+window.useDefaultKey = useDefaultKey;
 window.clearChat = clearChat;
 window.usePrompt = usePrompt;
 window.sendMessage = sendMessage;
 window.updateCharCount = updateCharCount;
+window.isUsingDefaultKey = isUsingDefaultKey;
