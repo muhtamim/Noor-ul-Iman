@@ -27,37 +27,7 @@
 <body>
 
 <!-- Navbar -->
-<nav class="navbar">
-  <div class="nav-container">
-    <a href="index.html" class="nav-logo">
-      <div class="nav-logo-icon">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
-        </svg>
-      </div>
-      <span class="nav-logo-text">Noor-ul-Iman</span>
-    </a>
-    <ul class="nav-links" id="navLinks">
-      <li><a href="index.html" class="active">Home</a></li>
-      <li><a href="pages/quran.html">Quran</a></li>
-      <li><a href="pages/learn.html">Learn</a></li>
-      <li><a href="pages/prayer.html">Prayer</a></li>
-      <li><a href="pages/ramadan.html">Ramadan</a></li>
-      <li><a href="pages/live.html">Live Makkah</a></li>
-      <li><a href="pages/qibla.html">Qibla</a></li>
-      <li><a href="pages/duas.html">Duas</a></li>
-      <li><a href="pages/hadith.html">Hadith</a></li>
-      <li><a href="pages/tasbih.html">Tasbih</a></li>
-      <li><a href="pages/names.html">99 Names</a></li>
-      <li><a href="pages/zakat.html">Zakat</a></li>
-      <li><a href="pages/support.html" style="background:var(--gold); color:white; border-radius:8px;">❤ Support</a></li>
-    </ul>
-    <div style="display:flex; gap:0.5rem; align-items:center;">
-      <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme"><i data-icon="moon"></i></button>
-      <button class="menu-toggle" id="menuToggle" aria-label="Menu"><i data-icon="menu"></i></button>
-    </div>
-  </div>
-</nav>
+<div id="navbar-mount"></div>
 
 <!-- Hero Section -->
 <section class="hero">
@@ -485,50 +455,12 @@
 </div>
 
 <!-- Footer -->
-<footer class="footer">
-  <div class="footer-content">
-    <div class="footer-brand">
-      <h3 style="display:inline-flex; align-items:center; gap:0.5rem;">
-        <i data-icon="crescent" data-size="28"></i>
-        <span>Noor-ul-Iman</span>
-      </h3>
-      <p>The most beautifully designed Islamic web app for the modern Muslim. Quran, prayer, and remembrance — all in one place. Free forever, made with love for the Ummah.</p>
-    </div>
-    <div class="footer-section">
-      <h4>Features</h4>
-      <ul>
-        <li><a href="pages/quran.html">Quran</a></li>
-        <li><a href="pages/prayer.html">Prayer Times</a></li>
-        <li><a href="pages/qibla.html">Qibla</a></li>
-        <li><a href="pages/tasbih.html">Tasbih</a></li>
-      </ul>
-    </div>
-    <div class="footer-section">
-      <h4>Resources</h4>
-      <ul>
-        <li><a href="pages/duas.html">Duas</a></li>
-        <li><a href="pages/names.html">99 Names</a></li>
-        <li><a href="pages/zakat.html">Zakat</a></li>
-      </ul>
-    </div>
-    <div class="footer-section">
-      <h4>Support</h4>
-      <ul>
-        <li><a href="#">About</a></li>
-        <li><a href="#">Privacy</a></li>
-        <li><a href="#">Contact</a></li>
-      </ul>
-    </div>
-  </div>
-  <div class="footer-bottom">
-    <p>© 2026 Noor-ul-Iman — Made for the Ummah</p>
-    <p class="quote">"And whoever relies upon Allah — then He is sufficient for him." — Quran 65:3</p>
-  </div>
-</footer>
+<div id="footer-mount"></div>
 
 <script src="js/icons.js"></script>
 <script src="data/daily.js"></script>
 <script src="data/azan-dua.js"></script>
+<script src="js/layout.js"></script>
 <script src="js/app.js"></script>
 <script src="js/azan.js"></script>
 
