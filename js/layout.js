@@ -4,7 +4,7 @@
 const navItems = [
   // Main features (always visible)
   { href: 'quran.html', label: 'Quran', icon: 'book', primary: true },
-  { href: 'ai.html', label: 'AI Assistant', icon: 'sparkle', primary: true, badge: 'NEW' },
+  { href: 'ai.html', label: 'Noor AI', icon: 'sparkle', primary: true, badge: 'NEW' },
   { href: 'learn.html', label: 'Learn', icon: 'sparkle', primary: true },
   { href: 'prayer.html', label: 'Prayer', icon: 'mosque', primary: true },
   { href: 'ramadan.html', label: 'Ramadan', icon: 'moonStar', primary: true },
