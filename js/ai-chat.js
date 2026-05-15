@@ -369,3 +369,4 @@ window.changeApiKey = changeApiKey;
 window.clearChat = clearChat;
 window.usePrompt = usePrompt;
 window.sendMessage = sendMessage;
+window.updateCharCount = updateCharCount;

@@ -110,30 +110,46 @@
         <!-- Chat messages -->
         <div id="chatMessages" class="ai-messages"></div>
 
-        <!-- Suggested prompts (shown initially) -->
-        <div id="suggestedPrompts" style="padding:1rem 1.5rem; border-top:1px solid var(--border);">
-          <div style="font-size:0.8rem; font-weight:700; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.1em; margin-bottom:0.75rem;">💡 Try asking:</div>
-          <div style="display:flex; gap:0.5rem; flex-wrap:wrap;">
-            <button class="prompt-chip" onclick="usePrompt('Explain Surah Al-Fatihah in simple words')">Explain Surah Al-Fatihah</button>
-            <button class="prompt-chip" onclick="usePrompt('Find a dua for anxiety and worry')">Dua for anxiety</button>
-            <button class="prompt-chip" onclick="usePrompt('What does the Quran say about patience?')">Quran on patience</button>
-            <button class="prompt-chip" onclick="usePrompt('Tell me 3 famous hadiths about good character')">Hadiths on character</button>
-            <button class="prompt-chip" onclick="usePrompt('How to perform Salah step by step')">How to pray</button>
-            <button class="prompt-chip" onclick="usePrompt('What are the conditions of valid wudu?')">Wudu conditions</button>
+        <!-- Topic Browser (shown initially) -->
+        <div id="suggestedPrompts" class="topic-browser">
+          <div class="topic-browser-header">
+            <div style="font-size:0.8rem; font-weight:700; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.1em;">💡 Browse Topics</div>
+            <div style="display:flex; gap:0.4rem; align-items:center; font-size:0.78rem; color:var(--text-muted);">
+              <i data-icon="sparkle" data-size="12" style="color:var(--primary);"></i>
+              <span>Tap to ask</span>
+            </div>
           </div>
+
+          <!-- Topic Categories -->
+          <div class="topic-categories" id="topicCategories">
+            <button class="topic-category active" data-cat="popular" onclick="filterTopics('popular')">⭐ Popular</button>
+            <button class="topic-category" data-cat="quran" onclick="filterTopics('quran')">📖 Quran</button>
+            <button class="topic-category" data-cat="prayer" onclick="filterTopics('prayer')">🕌 Prayer</button>
+            <button class="topic-category" data-cat="dua" onclick="filterTopics('dua')">🤲 Dua</button>
+            <button class="topic-category" data-cat="hadith" onclick="filterTopics('hadith')">📜 Hadith</button>
+            <button class="topic-category" data-cat="fiqh" onclick="filterTopics('fiqh')">⚖️ Fiqh</button>
+            <button class="topic-category" data-cat="prophets" onclick="filterTopics('prophets')">👤 Prophets</button>
+            <button class="topic-category" data-cat="ramadan" onclick="filterTopics('ramadan')">🌙 Ramadan</button>
+            <button class="topic-category" data-cat="lifestyle" onclick="filterTopics('lifestyle')">🌟 Lifestyle</button>
+          </div>
+
+          <!-- Topic Questions Grid -->
+          <div class="topic-questions" id="topicQuestions"></div>
         </div>
 
         <!-- Input -->
         <div style="padding:1.25rem 1.5rem; border-top:1px solid var(--border); background:var(--bg-card-solid);">
-          <form id="chatForm" onsubmit="sendMessage(event)" style="display:flex; gap:0.75rem; align-items:flex-end;">
-            <textarea id="chatInput" placeholder="Ask anything about Islam, Quran, Hadith..." rows="1" style="flex:1; padding:0.85rem 1.1rem; border:1.5px solid var(--border); border-radius:var(--radius-sm); font-size:1rem; background:var(--bg); color:var(--text); font-family:inherit; resize:none; min-height:48px; max-height:120px;" required></textarea>
-            <button type="submit" class="btn" id="sendBtn" style="min-width:120px; justify-content:center;">
-              <i data-icon="lightning" data-size="16"></i>
-              <span>Send</span>
+          <form id="chatForm" onsubmit="sendMessage(event)" style="display:flex; gap:0.5rem; align-items:flex-end;">
+            <button type="button" id="voiceBtn" onclick="toggleVoiceInput()" title="Click to speak" class="voice-btn">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg>
+            </button>
+            <textarea id="chatInput" placeholder="Ask anything... or click 🎤 to speak" rows="1" style="flex:1; padding:0.85rem 1.1rem; border:1.5px solid var(--border); border-radius:var(--radius-sm); font-size:1rem; background:var(--bg); color:var(--text); font-family:inherit; resize:none; min-height:48px; max-height:120px;" required></textarea>
+            <button type="submit" class="btn" id="sendBtn" style="min-width:auto; justify-content:center; padding:0.85rem 1rem;">
+              <i data-icon="lightning" data-size="18"></i>
             </button>
           </form>
           <div style="display:flex; justify-content:space-between; margin-top:0.5rem; font-size:0.75rem; color:var(--text-muted);">
-            <span>Press Shift+Enter for new line</span>
+            <span>Press Shift+Enter for new line • 🎤 for voice</span>
             <span id="charCounter">0 characters</span>
           </div>
         </div>
@@ -220,6 +236,7 @@
 <script src="../js/azan.js"></script>
 <script src="../js/layout.js"></script>
 <script src="../js/ai-limits.js"></script>
+<script src="../js/ai-topics.js"></script>
 <script src="../js/ai-chat.js"></script>
 <script>
   // Initialize usage badge on load

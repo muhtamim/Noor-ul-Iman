@@ -1485,6 +1485,172 @@
   40% { transform: scale(1); opacity: 1; }
 }
 
+/* ====== Topic Browser ====== */
+.topic-browser {
+  padding: 1.25rem 1.5rem;
+  border-top: 1px solid var(--border);
+  background: linear-gradient(180deg, var(--bg-card-solid), var(--bg));
+}
+
+.topic-browser-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.topic-categories {
+  display: flex;
+  gap: 0.4rem;
+  overflow-x: auto;
+  padding-bottom: 0.75rem;
+  margin-bottom: 1rem;
+  scrollbar-width: thin;
+}
+
+.topic-categories::-webkit-scrollbar { height: 5px; }
+.topic-categories::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+
+.topic-category {
+  background: var(--bg-card-solid);
+  border: 1.5px solid var(--border);
+  padding: 0.5rem 0.9rem;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--text);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+  font-family: inherit;
+  flex-shrink: 0;
+}
+
+.topic-category:hover {
+  border-color: var(--primary);
+  color: var(--primary);
+  transform: translateY(-1px);
+}
+
+.topic-category.active {
+  background: var(--gradient-emerald);
+  color: white;
+  border-color: transparent;
+  box-shadow: var(--shadow-sm);
+}
+
+.topic-questions {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 0.6rem;
+}
+
+.topic-question {
+  background: var(--bg-card-solid);
+  border: 1.5px solid var(--border);
+  padding: 0.85rem 1rem;
+  border-radius: var(--radius);
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  cursor: pointer;
+  text-align: left;
+  font-family: inherit;
+  color: var(--text);
+  transition: all 0.25s var(--transition);
+  width: 100%;
+}
+
+.topic-question:hover {
+  border-color: var(--primary);
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.05), transparent);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow);
+}
+
+.topic-q-icon {
+  font-size: 1.6rem;
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg);
+  border-radius: 10px;
+}
+
+.topic-q-body {
+  flex: 1;
+  min-width: 0;
+}
+
+.topic-q-text {
+  font-weight: 700;
+  font-size: 0.92rem;
+  line-height: 1.3;
+  color: var(--text);
+  margin-bottom: 0.15rem;
+}
+
+.topic-q-desc {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+}
+
+.topic-q-arrow {
+  color: var(--text-muted);
+  font-size: 1.2rem;
+  transition: all 0.2s ease;
+}
+
+.topic-question:hover .topic-q-arrow {
+  color: var(--primary);
+  transform: translateX(3px);
+}
+
+/* ====== Voice Input Button ====== */
+.voice-btn {
+  width: 48px;
+  height: 48px;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--bg);
+  color: var(--text-muted);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s var(--transition);
+  flex-shrink: 0;
+}
+
+.voice-btn:hover {
+  border-color: var(--primary);
+  color: var(--primary);
+  background: var(--bg-card-solid);
+}
+
+.voice-btn.listening {
+  background: linear-gradient(135deg, #ef4444, #dc2626);
+  color: white;
+  border-color: transparent;
+  animation: voice-pulse 1.5s ease-in-out infinite;
+  box-shadow: 0 0 0 4px rgba(239, 68, 68, 0.2);
+}
+
+@keyframes voice-pulse {
+  0%, 100% { box-shadow: 0 0 0 4px rgba(239, 68, 68, 0.2); }
+  50% { box-shadow: 0 0 0 12px rgba(239, 68, 68, 0); }
+}
+
+@media (max-width: 600px) {
+  .topic-questions { grid-template-columns: 1fr; }
+  .topic-q-icon { width: 36px; height: 36px; font-size: 1.4rem; }
+}
+
 /* Prompt chips */
 .prompt-chip {
   background: var(--bg);
@@ -1617,6 +1783,177 @@
   padding-left: 0;
   padding-right: 1rem;
   font-style: normal;
+}
+
+/* ====== Ramadan Stats Grid ====== */
+.ramadan-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 1rem;
+  margin: 1.5rem 0;
+}
+
+/* ====== Ramadan Day Cards (new layout) ====== */
+.ramadan-grid-wrapper {
+  margin-top: 1.5rem;
+}
+
+.ramadan-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1rem;
+}
+
+.ramadan-day-card {
+  background: var(--bg-card-solid);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.25rem;
+  transition: all 0.3s var(--transition);
+  position: relative;
+  overflow: hidden;
+}
+
+.ramadan-day-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #6366f1, var(--gold));
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.ramadan-day-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--primary);
+}
+
+.ramadan-day-card:hover::before {
+  opacity: 1;
+}
+
+.ramadan-day-card.today {
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.08), rgba(245, 158, 11, 0.04));
+  border-color: var(--primary);
+  box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.2), var(--shadow-md);
+}
+
+.ramadan-day-card.today::before {
+  opacity: 1;
+  height: 5px;
+}
+
+.ramadan-day-card.past {
+  opacity: 0.6;
+}
+
+.ramadan-day-card.past:hover {
+  opacity: 1;
+}
+
+.ramadan-day-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.ramadan-day-number {
+  width: 48px;
+  height: 48px;
+  background: var(--gradient-emerald);
+  color: white;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 1.2rem;
+  flex-shrink: 0;
+  box-shadow: var(--shadow-sm);
+}
+
+.ramadan-day-card.today .ramadan-day-number {
+  background: var(--gradient-gold);
+}
+
+.ramadan-day-greg {
+  font-size: 0.92rem;
+  font-weight: 800;
+  color: var(--text);
+}
+
+.ramadan-day-hijri {
+  font-size: 0.78rem;
+  color: var(--primary);
+  font-weight: 600;
+  margin-top: 0.15rem;
+}
+
+.ramadan-times {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.ramadan-time-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.6rem 0.85rem;
+  border-radius: 10px;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+.ramadan-time-row.sehri-row {
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(99, 102, 241, 0.03));
+  color: #6366f1;
+}
+
+.ramadan-time-row.iftar-row {
+  background: linear-gradient(135deg, rgba(245, 158, 11, 0.12), rgba(245, 158, 11, 0.04));
+  color: var(--gold-dark);
+}
+
+.ramadan-time-row.duration-row {
+  background: var(--bg);
+  color: var(--text-muted);
+  font-size: 0.85rem;
+}
+
+[data-theme="dark"] .ramadan-time-row.sehri-row { color: #a5b4fc; }
+[data-theme="dark"] .ramadan-time-row.iftar-row { color: var(--gold-light); }
+
+.ramadan-time-label {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+.ramadan-time-value {
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+  font-size: 0.95rem;
+}
+
+.ramadan-time-value.duration {
+  font-weight: 600;
+  font-size: 0.82rem;
+}
+
+@media (max-width: 600px) {
+  .ramadan-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 /* ====== Ramadan Calendar Table ====== */
