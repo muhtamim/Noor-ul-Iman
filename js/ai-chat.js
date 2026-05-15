@@ -203,10 +203,23 @@ async function sendMessage(e) {
   const text = input.value.trim();
   if (!text) return;
 
+  // Check rate limit
+  if (window.canSendMessage && !window.canSendMessage()) {
+    if (window.showUpgradeModal) window.showUpgradeModal();
+    if (window.showToast) window.showToast("Daily limit reached. Upgrade for more!");
+    return;
+  }
+
   // Hide suggested prompts
   document.getElementById('suggestedPrompts').style.display = 'none';
 
   addUserMessage(text);
+
+  // Increment usage counter
+  if (window.incrementUsage) {
+    window.incrementUsage();
+    if (window.renderUsageBadge) window.renderUsageBadge();
+  }
   input.value = '';
   updateCharCount();
   sendBtn.disabled = true;

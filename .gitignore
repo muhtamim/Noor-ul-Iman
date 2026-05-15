@@ -26,5 +26,8 @@ node_modules/
 setup-ai.html
 dev-config.js
 
+# Owner-only utilities — never commit
+code-generator.html
+
 # OS
 Thumbs.db

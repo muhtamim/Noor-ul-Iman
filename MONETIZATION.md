@@ -2,6 +2,44 @@
 
 A multi-channel revenue strategy to sustain this free Islamic web app while keeping the core experience free for the Ummah.
 
+## 🤖 NEW: AI Premium Tiers (Highest Revenue Potential)
+
+The AI Islamic Assistant has tiered access:
+
+| Tier | Price | Daily AI Questions | Target Audience |
+|------|-------|-------------------|-----------------|
+| 🌱 Free | ৳0 | 10/day | Everyone |
+| ✨ Plus | ৳149/mo ($1.49) | 100/day | Casual users |
+| 🌟 Pro | ৳299/mo ($2.99) | Unlimited | Power users |
+| 👑 Lifetime | ৳1,999 once ($19.99) | Unlimited forever | Supporters |
+
+### How the System Works
+1. User reaches daily limit → upgrade modal appears
+2. Visits `/pages/upgrade.html` → picks plan
+3. Pays via bKash/Nagad/Rocket/PayPal
+4. Sends payment proof via email/WhatsApp
+5. Owner generates unlock code via `/code-generator.html` (local-only)
+6. Owner adds hashed code to `js/ai-limits.js`, deploys
+7. Owner emails plain code to customer
+8. Customer enters code → unlocked forever (on that device)
+
+### Why This Architecture Wins
+- **NO backend needed** — everything runs in browser
+- **Codes are SHA-256 hashed** in code (originals never visible)
+- **One code = one device** (tracked in localStorage)
+- **Each user pays own API costs** (Gemini free tier)
+- **Owner costs: $0** — scales infinitely
+
+### Revenue Math (AI Tier Only)
+| Active users | 1% conversion to Pro | Monthly Revenue |
+|---|---|---|
+| 1,000 | 10 × ৳299 | ৳2,990 (~$30) |
+| 10,000 | 100 × ৳299 | ৳29,900 (~$300) |
+| 100,000 | 1,000 × ৳299 | ৳299,000 (~$3,000) |
+| 1,000,000 | 10,000 × ৳299 | ৳2,990,000 (~$30,000) |
+
+Plus Lifetime sales spike during Ramadan/Eid.
+
 ## 🎯 Strategy: Halal & Diverse Revenue Streams
 
 We've intentionally built **5 separate income channels** so we're never dependent on a single source:

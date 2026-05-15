@@ -17,6 +17,7 @@ const navItems = [
   { href: 'names.html', label: '99 Names of Allah', icon: 'sparkle', primary: false },
   { href: 'zakat.html', label: 'Zakat Calculator', icon: 'coin', primary: false },
   // Info pages (in "More" dropdown)
+  { href: 'upgrade.html', label: 'Upgrade AI ⚡', icon: 'sparkle', primary: false, section: 'info' },
   { href: 'about.html', label: 'About Us', icon: 'crescent', primary: false, section: 'info' },
   { href: 'contact.html', label: 'Contact', icon: 'phone', primary: false, section: 'info' },
   { href: 'privacy.html', label: 'Privacy Policy', icon: 'shield', primary: false, section: 'info' }
